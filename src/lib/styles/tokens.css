@@ -1,0 +1,46 @@
+:root {
+	/* Fonts */
+	--font-sans-serif: 'Raleway Variable', sans-serif;
+
+	/* Colors */
+	--neutral-50: #f9fafb;
+	--neutral-100: #f3f4f6;
+	--neutral-200: #e5e7eb;
+	--neutral-300: #d1d5db;
+	--neutral-400: #9ca3af;
+	--neutral-500: #6b7280;
+	--neutral-600: #4b5563;
+	--neutral-700: #374151;
+	--neutral-800: #1f2937;
+	--neutral-900: #111827;
+	--neutral-950: #030712;
+
+	/* Font sizes */
+	--text-xs: 0.75rem; /* 12px */
+	--text-sm: 0.875rem; /* 14px */
+	--text-normal: 1rem; /* 16px */
+	--text-lg: 1.25rem; /* 20px */
+	--text-xl: 1.5rem; /* 24px */
+	--text-2xl: 1.875rem; /* 30px */
+	--text-3xl: 2.25rem; /* 36px */
+	--text-4xl: 3rem; /* 48px */
+
+	/* Sizes */
+	--size-1: 0.25rem; /* 4px */
+	--size-2: 0.5rem; /* 8px */
+	--size-3: 0.75rem; /* 12px */
+	--size-4: 1rem; /* 16px */
+	--size-6: 1.5rem; /* 24px */
+	--size-8: 2rem; /* 32px */
+	--size-12: 3rem; /* 48px */
+	--size-16: 4rem; /* 64px */
+	--size-24: 6rem; /* 96px */
+	--size-32: 8rem; /* 128px */
+	--size-48: 12rem; /* 192px */
+	--size-64: 16rem; /* 256px */
+	--size-192: 48rem; /* 768px */
+
+	/* Radii */
+	--radius-sm: 0.25rem; /* 4px */
+	--radius-md: 0.5rem; /* 8px */
+}
