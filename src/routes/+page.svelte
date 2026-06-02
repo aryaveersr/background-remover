@@ -1,12 +1,18 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
+	import FileUpload from '$lib/components/FileUpload.svelte';
+
+	let files = $state<File[]>([]);
 	let progress = $state<number | null>(null);
 	let src = $state<string | null>(null);
 
-	function onsubmit(ev: SubmitEvent & { currentTarget: HTMLFormElement }) {
+	function onsubmit(ev: SubmitEvent) {
 		ev.preventDefault();
 
-		const form = new FormData(ev.currentTarget);
 		const xhr = new XMLHttpRequest();
+		const form = new FormData();
+
+		form.set('file', files[0]);
 
 		xhr.upload.addEventListener('loadstart', () => {
 			progress = 0;
@@ -37,10 +43,14 @@
 	}
 </script>
 
-<form enctype="multipart/form-data" {onsubmit}>
-	<input type="file" name="file" accept="image/png, image/jpeg" required />
-	<button type="submit">Submit</button>
+<form {onsubmit}>
+	<FileUpload accept="image/png, image/jpeg" onupload={(f) => files.push(f)} />
+	<Button type="submit" size="md" style="width: 100%">Submit</Button>
 </form>
+
+{#each files as file, index (index)}
+	<p>{file.name}</p>
+{/each}
 
 {#if progress}
 	<progress value={progress} max="100"></progress>
@@ -49,3 +59,14 @@
 {#if src}
 	<img {src} alt="Result" />
 {/if}
+
+<style>
+	form {
+		/* Layout */
+		display: flex;
+		flex-direction: column;
+
+		/* Spacing */
+		gap: 1rem;
+	}
+</style>

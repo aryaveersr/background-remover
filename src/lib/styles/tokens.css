@@ -43,4 +43,7 @@
 	/* Radii */
 	--radius-sm: 0.25rem; /* 4px */
 	--radius-md: 0.5rem; /* 8px */
+
+	/* Transitions */
+	--transition-duration: 0.25s;
 }

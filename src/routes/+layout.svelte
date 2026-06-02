@@ -29,4 +29,9 @@
 		display: grid;
 		grid-template-rows: auto 1fr;
 	}
+
+	main {
+		/* Spacing */
+		padding: var(--size-4);
+	}
 </style>

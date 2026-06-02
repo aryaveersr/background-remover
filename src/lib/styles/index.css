@@ -16,7 +16,7 @@ body {
 	font-weight: 500;
 
 	/* Colors */
-	background-color: var(--neutral-100);
+	background-color: var(--neutral-50);
 	color: var(--neutral-800);
 
 	/* Fill available space */
@@ -30,5 +30,5 @@ select,
 textarea {
 	/* Font */
 	font-family: inherit;
-	font-size: var(--text-sm);
+	font-size: inherit;
 }
