@@ -8,8 +8,18 @@
 		const form = new FormData(ev.currentTarget);
 		const xhr = new XMLHttpRequest();
 
+		xhr.upload.addEventListener('loadstart', () => {
+			progress = 0;
+		});
+
 		xhr.upload.addEventListener('progress', (ev) => {
-			if (ev.lengthComputable) progress = Math.round((ev.loaded / ev.total) * 100);
+			if (ev.lengthComputable && progress != null) {
+				progress = Math.round((ev.loaded / ev.total) * 100);
+			}
+		});
+
+		xhr.upload.addEventListener('load', () => {
+			progress = null;
 		});
 
 		xhr.addEventListener('load', () => {
@@ -19,8 +29,6 @@
 			a.href = src;
 			a.download = 'result.png';
 			a.click();
-
-			progress = null;
 		});
 
 		xhr.responseType = 'blob';
