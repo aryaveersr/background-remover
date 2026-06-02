@@ -4,6 +4,7 @@
 	import FileUpload from '$lib/components/FileUpload.svelte';
 	import { Entry } from '$lib/types/entry.svelte';
 
+	let status = $state<'waiting' | 'submitted'>('waiting');
 	let entries = $state<Entry[]>([]);
 
 	function onsubmit(ev: SubmitEvent) {
@@ -29,6 +30,8 @@
 			xhr.open('POST', '/');
 			xhr.send(form);
 		}
+
+		status = 'submitted';
 	}
 </script>
 
@@ -36,10 +39,12 @@
 	{#if entries.length > 0}
 		<EntryList {entries} />
 	{/if}
-	<form {onsubmit}>
-		<FileUpload onupload={(file) => entries.push(new Entry(file))} />
-		<Button type="submit" size="md" style="width: 100%">Submit</Button>
-	</form>
+	{#if status === 'waiting'}
+		<form {onsubmit}>
+			<FileUpload onupload={(file) => entries.push(new Entry(file))} />
+			<Button type="submit" size="md" style="width: 100%">Submit</Button>
+		</form>
+	{/if}
 </div>
 
 <!-- {#if src}
