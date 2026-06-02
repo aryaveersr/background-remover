@@ -11,7 +11,7 @@ export class Entry {
 	constructor(file: File) {
 		this.id = Entry.idCounter++;
 		this.file = file;
-		this.status = 'new';
+		this.status = $state('new');
 		this.src = $state('');
 		this.progress = $state(0);
 	}

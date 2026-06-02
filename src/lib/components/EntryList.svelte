@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Entry } from '$lib/types/entry.svelte';
-	import { Trash2 } from '@lucide/svelte';
+	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
+	import IconButton from './IconButton.svelte';
+	import Progress from './Progress.svelte';
 
 	interface Props {
 		entries: Entry[];
@@ -12,15 +14,32 @@
 <div>
 	<h2>Files</h2>
 	<ul aria-label="Files">
-		{#each entries as { id, file } (id)}
+		{#each entries as entry (entry.id)}
 			<li>
-				<p>{file.name}</p>
-				<button
-					onclick={() => (entries = entries.filter((f) => f.id !== id))}
-					aria-label={`Remove ${file.name}`}
-				>
-					<Trash2 />
-				</button>
+				<p>{entry.file.name}</p>
+				{#if entry.status === 'new'}
+					<IconButton
+						onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
+						aria-label={`Remove ${entry.file.name}`}
+					>
+						<Trash2 />
+					</IconButton>
+				{:else if entry.status === 'uploading'}
+					<span style:padding="var(--size-1)">
+						<Progress progress={entry.progress} />
+					</span>
+				{:else if entry.status === 'processing'}
+					<span style:padding="var(--size-1)">
+						<code style:font-size="var(--text-sm)">Processing</code>
+					</span>
+				{:else if entry.status === 'success'}
+					<IconButton
+						onclick={() => entry.download()}
+						aria-label={`Download result for ${entry.file.name}`}
+					>
+						<ArrowDownToLine />
+					</IconButton>
+				{/if}
 			</li>
 		{/each}
 	</ul>
@@ -68,45 +87,6 @@
 
 		&:last-child {
 			border-bottom: 1px solid var(--neutral-300);
-		}
-
-		& button {
-			/* Layout */
-			display: grid;
-			place-items: center;
-
-			/* Appearance */
-			color: var(--neutral-600);
-			border: none;
-			background: none;
-			outline: none;
-			border-radius: var(--radius-sm);
-
-			/* Spacing */
-			padding: var(--size-1) var(--size-2);
-
-			/* Interaction */
-			cursor: pointer;
-
-			transition:
-				background-color var(--transition-duration) ease-in-out,
-				box-shadow var(--transition-duration) ease-in-out;
-
-			& :global(.lucide) {
-				width: var(--size-4);
-			}
-
-			&:hover,
-			&:focus {
-				background-color: var(--neutral-100);
-				box-shadow: 0px 1px 1px 0px var(--neutral-200);
-			}
-
-			&:focus-visible {
-				/* Outline styles for focus ring */
-				outline: 2px solid var(--neutral-600);
-				outline-offset: 1px;
-			}
 		}
 	}
 </style>
