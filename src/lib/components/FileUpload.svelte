@@ -7,17 +7,47 @@
 	}
 
 	let { onupload = () => {}, accept }: Props = $props();
-	let input: HTMLInputElement;
+	let label: HTMLLabelElement;
 
-	function onchange() {
-		if (input.files?.[0]) {
-			onupload(input.files[0]);
-			input.value = '';
+	function onchange(ev: Event & { currentTarget: HTMLInputElement }) {
+		if (ev.currentTarget.files?.[0]) {
+			onupload(ev.currentTarget.files[0]);
+			ev.currentTarget.value = '';
+		}
+	}
+
+	function ondrop(ev: DragEvent) {
+		const files = [...ev.dataTransfer!.items].filter((item) => item.kind === 'file');
+		if (files.length > 0) {
+			ev.preventDefault();
+			const filteredFiles = files.filter((item) => item.type.startsWith('image/'));
+			if (filteredFiles.length > 0) {
+				ev.dataTransfer!.dropEffect = 'copy';
+				filteredFiles.forEach((item) => onupload(item.getAsFile()!));
+			} else {
+				ev.dataTransfer!.dropEffect = 'none';
+			}
 		}
 	}
 </script>
 
-<label>
+<svelte:window
+	ondrop={(ev) => {
+		if ([...ev.dataTransfer!.items].some((item) => item.kind === 'file')) {
+			ev.preventDefault();
+		}
+	}}
+	ondragover={(ev) => {
+		if ([...ev.dataTransfer!.items].some((item) => item.kind === 'file')) {
+			ev.preventDefault();
+			if (!label.contains(ev.target as Node)) {
+				ev.dataTransfer!.dropEffect = 'none';
+			}
+		}
+	}}
+/>
+
+<label bind:this={label} {ondrop}>
 	<div role="button" tabindex="0">
 		<span>
 			<Upload />
@@ -25,7 +55,7 @@
 		<p>Click or drag and drop images here...</p>
 		<p class="subtle">.png,.jpg supported</p>
 	</div>
-	<input bind:this={input} type="file" {onchange} {accept} />
+	<input type="file" {onchange} {accept} />
 </label>
 
 <style>
@@ -42,6 +72,7 @@
 		/* Appearance */
 		border-radius: var(--radius-md);
 		border: 1.5px dashed var(--neutral-300);
+		background-color: var(--neutral-50);
 
 		/* Layout */
 		display: flex;
