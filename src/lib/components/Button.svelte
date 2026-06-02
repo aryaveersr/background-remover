@@ -26,9 +26,7 @@
 		border-radius: var(--radius-sm);
 
 		/* Shadow */
-		box-shadow:
-			0px 0px 4px 2px var(--neutral-300),
-			0px 1px 1px 1px var(--neutral-400);
+		box-shadow: 0px 1px 1px 1px var(--neutral-400);
 
 		/* Interactions */
 		cursor: pointer;
@@ -46,18 +44,18 @@
 		&:hover,
 		&:focus {
 			background-color: var(--neutral-700);
-			box-shadow: 0px 0px 4px 2px var(--neutral-300);
+			box-shadow: 0px 0px 4px 1px var(--neutral-300);
 		}
 
 		&:focus-visible {
 			/* Outline styles for focus ring */
-			outline: 2px solid var(--neutral-400);
+			outline: 2px solid var(--neutral-600);
 			outline-offset: 1px;
 		}
 
 		&:active {
 			background-color: var(--neutral-600);
-			box-shadow: inset 0px 0px 2px 1px var(--neutral-400);
+			box-shadow: inset 0px 0px 2px 2px var(--neutral-400);
 		}
 
 		/* Size Variants */

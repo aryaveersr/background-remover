@@ -3,18 +3,10 @@
 
 	interface Props {
 		onupload?: (file: File) => void;
-		accept?: string;
 	}
 
-	let { onupload = () => {}, accept }: Props = $props();
+	let { onupload = () => {} }: Props = $props();
 	let label: HTMLLabelElement;
-
-	function onchange(ev: Event & { currentTarget: HTMLInputElement }) {
-		if (ev.currentTarget.files?.[0]) {
-			onupload(ev.currentTarget.files[0]);
-			ev.currentTarget.value = '';
-		}
-	}
 
 	function ondrop(ev: DragEvent) {
 		const files = [...ev.dataTransfer!.items].filter((item) => item.kind === 'file');
@@ -55,7 +47,15 @@
 		<p>Click or drag and drop images here...</p>
 		<p class="subtle">.png,.jpg supported</p>
 	</div>
-	<input type="file" {onchange} {accept} />
+	<input
+		type="file"
+		accept="image/png, image/jpeg"
+		multiple
+		onchange={(ev) => {
+			[...ev.currentTarget.files!].forEach(onupload);
+			ev.currentTarget.value = '';
+		}}
+	/>
 </label>
 
 <style>
@@ -83,16 +83,19 @@
 		/* Interaction */
 		cursor: pointer;
 
-		transition: background-color var(--transition-duration) ease-in-out;
+		transition:
+			background-color var(--transition-duration) ease-in-out,
+			border-color var(--transition-duration) ease-in-out;
 
 		&:hover,
 		&:focus {
 			background-color: var(--neutral-100);
+			border-color: var(--neutral-400);
 		}
 
 		&:focus-visible {
 			/* Outline styles for focus ring */
-			outline: 2px solid var(--neutral-400);
+			outline: 2px solid var(--neutral-600);
 			outline-offset: 2px;
 		}
 	}
