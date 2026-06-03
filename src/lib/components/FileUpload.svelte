@@ -112,6 +112,10 @@
 		color: var(--neutral-600);
 	}
 
+	p {
+		text-align: center;
+	}
+
 	p.subtle {
 		/* Appearance */
 		color: var(--neutral-500);

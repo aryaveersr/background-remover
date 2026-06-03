@@ -5,14 +5,16 @@
 
 	interface Props {
 		children?: Snippet;
+		icon?: Snippet;
 		size?: 'sm' | 'md';
 	}
 
-	let { children, size = 'sm', ...props }: Merge<Props, HTMLButtonAttributes> = $props();
+	let { children, icon, size = 'sm', ...props }: Merge<Props, HTMLButtonAttributes> = $props();
 </script>
 
 <button {...props} class={[`size-${size}`]}>
 	{@render children?.()}
+	{@render icon?.()}
 </button>
 
 <style>
@@ -63,11 +65,26 @@
 		&.size-sm {
 			font-size: var(--text-sm);
 			padding: var(--size-2) var(--size-4);
+			gap: var(--size-2);
+
+			& :global(.lucide) {
+				width: var(--size-3);
+			}
 		}
 
 		&.size-md {
 			font-size: var(--text-normal);
 			padding: var(--size-3) var(--size-6);
+			gap: var(--size-4);
+
+			& :global(.lucide) {
+				width: var(--size-4);
+			}
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
 		}
 	}
 </style>

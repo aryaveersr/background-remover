@@ -3,6 +3,7 @@
 	import EntryList from '$lib/components/EntryList.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
 	import { Entry } from '$lib/types/entry.svelte';
+	import { ArrowDownToLine } from '@lucide/svelte';
 
 	let status = $state<'waiting' | 'submitted'>('waiting');
 	let entries = $state<Entry[]>([]);
@@ -42,17 +43,18 @@
 	{#if status === 'waiting'}
 		<form {onsubmit}>
 			<FileUpload onupload={(file) => entries.push(new Entry(file))} />
-			<Button type="submit" size="md" style="width: 100%">Submit</Button>
+			<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
+				Submit
+			</Button>
 		</form>
 	{/if}
+	{#if entries.length > 0 && entries.every((entry) => entry.status === 'success')}
+		<Button size="md" style="width: 100%">
+			Download All
+			<ArrowDownToLine style="" />
+		</Button>
+	{/if}
 </div>
-
-<!-- {#if src}
-	<img {src} alt="Result" />
-{/if}{#if progress}
-					<progress value={progress} max="100"></progress>
-				{/if}
--->
 
 <style>
 	.container {
