@@ -18,7 +18,7 @@
 >
 	<FileUpload onupload={(file) => entries.push(new Entry(file))} />
 	<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
-		Submit
+		Remove Background
 	</Button>
 </form>
 
