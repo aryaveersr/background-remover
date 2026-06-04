@@ -1,17 +1,24 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import type { Entry, Status } from '$lib/entry.svelte';
+	import type { Entry } from '$lib/entry.svelte';
 	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
 
 	interface Props {
 		entries: Entry[];
-		status: Status;
 	}
 
-	let { entries = $bindable(), status }: Props = $props();
+	let { entries = $bindable() }: Props = $props();
 </script>
 
 <div class="container">
+	<header>
+		<h2>Images</h2>
+		<Button theme="subtle" onclick={() => (entries = [])}>
+			Clear all
+			<Trash2 />
+		</Button>
+	</header>
 	<ul aria-label="Images">
 		{#each entries as entry (entry.id)}
 			<li>
@@ -50,7 +57,25 @@
 			0px 1px 2px 0px var(--neutral-300);
 
 		/* Spacing */
-		padding: 2rem 1rem;
+		padding: 1rem;
+		gap: 1rem;
+
+		/* Layout */
+		display: flex;
+		flex-direction: column;
+	}
+
+	header {
+		/* Layout */
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	header h2 {
+		/* Font */
+		font-size: var(--text-lg);
+		font-weight: 500;
 	}
 
 	ul {

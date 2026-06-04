@@ -17,7 +17,7 @@
 	</section>
 	{#if entries.length}
 		<section>
-			<ImageList bind:entries {status} />
+			<ImageList bind:entries />
 		</section>
 	{/if}
 </div>
