@@ -16,6 +16,7 @@
 		entries.forEach((entry) => entry.upload());
 	}}
 >
+	<h2>Upload images</h2>
 	<FileUpload onupload={(file) => entries.push(new Entry(file))} />
 	<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
 		Remove Background
@@ -37,6 +38,12 @@
 
 		/* Spacing */
 		padding: 1rem;
-		gap: 2rem;
+		gap: 1rem;
+	}
+
+	h2 {
+		/* Font */
+		font-size: var(--text-lg);
+		font-weight: 500;
 	}
 </style>

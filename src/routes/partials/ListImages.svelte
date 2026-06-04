@@ -15,10 +15,12 @@
 <div class="container">
 	<header>
 		<h2>Images</h2>
-		<Button theme="subtle" onclick={() => (entries = [])}>
-			Clear all
-			<Trash2 />
-		</Button>
+		{#if entries.length}
+			<Button theme="subtle" onclick={() => (entries = [])}>
+				Clear all
+				<Trash2 />
+			</Button>
+		{/if}
 	</header>
 	{#if status === 'processed'}
 		<Button
@@ -77,6 +79,9 @@
 	}
 
 	header {
+		/* Make the height same as the heading for alignment purposes */
+		height: 30px;
+
 		/* Layout */
 		display: flex;
 		align-items: center;
@@ -106,8 +111,8 @@
 		position: relative;
 
 		/* Border */
-		border: 1px solid var(--neutral-200);
-		border-radius: var(--radius-md);
+		outline: 1px solid var(--neutral-200);
+		border-radius: var(--radius-sm);
 
 		box-shadow:
 			0px 0px 8px 1px var(--neutral-100),
