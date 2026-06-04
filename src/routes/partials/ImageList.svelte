@@ -1,14 +1,15 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import type { Entry } from '$lib/entry.svelte';
+	import type { Entry, Status } from '$lib/entry.svelte';
 	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
 
 	interface Props {
 		entries: Entry[];
+		status: Status;
 	}
 
-	let { entries = $bindable() }: Props = $props();
+	let { entries = $bindable(), status }: Props = $props();
 </script>
 
 <div class="container">
@@ -19,6 +20,16 @@
 			<Trash2 />
 		</Button>
 	</header>
+	{#if status === 'processed'}
+		<Button
+			size="md"
+			style="width: 100%"
+			onclick={() => entries.forEach((entry) => entry.download())}
+		>
+			Download all
+			<ArrowDownToLine />
+		</Button>
+	{/if}
 	<ul aria-label="Images">
 		{#each entries as entry (entry.id)}
 			<li>

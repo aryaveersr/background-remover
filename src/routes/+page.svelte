@@ -12,12 +12,14 @@
 
 <div data-status={status}>
 	<Header />
-	<section>
-		<AddImages bind:entries />
-	</section>
+	{#if status == 'unprocessed'}
+		<section>
+			<AddImages bind:entries />
+		</section>
+	{/if}
 	{#if entries.length}
 		<section>
-			<ImageList bind:entries />
+			<ImageList bind:entries {status} />
 		</section>
 	{/if}
 </div>
