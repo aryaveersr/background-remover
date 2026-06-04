@@ -1,85 +1,40 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import EntryList from '$lib/components/EntryList.svelte';
-	import FileUpload from '$lib/components/FileUpload.svelte';
-	import { Entry } from '$lib/types/entry.svelte';
-	import { ArrowDownToLine } from '@lucide/svelte';
+	import type { Entry, Status } from '$lib/entry.svelte';
+	import AddImages from './partials/AddImages.svelte';
+	import Header from './partials/Header.svelte';
+	import ImageList from './partials/ImageList.svelte';
 
-	let status = $state<'waiting' | 'submitted'>('waiting');
 	let entries = $state<Entry[]>([]);
-
-	function onsubmit(ev: SubmitEvent) {
-		ev.preventDefault();
-
-		for (const entry of entries) {
-			const xhr = new XMLHttpRequest();
-			const form = new FormData();
-
-			form.set('file', entry.file);
-			entry.status = 'uploading';
-
-			xhr.upload.addEventListener('progress', (ev) => {
-				if (ev.lengthComputable && entry.status == 'uploading') {
-					entry.progress = Math.round((ev.loaded / ev.total) * 100);
-				}
-			});
-
-			xhr.upload.addEventListener('load', () => (entry.status = 'processing'));
-			xhr.addEventListener('load', () => entry.onSuccess(xhr.response));
-
-			xhr.responseType = 'blob';
-			xhr.open('POST', '/');
-			xhr.send(form);
-		}
-
-		status = 'submitted';
-	}
+	let status = $derived<Status>(
+		entries.find((e) => e.status == 'processing')?.status ?? entries?.[0]?.status ?? 'unprocessed'
+	);
 </script>
 
-<div class="container">
-	{#if entries.length > 0}
-		<EntryList {entries} />
-	{/if}
-	{#if status === 'waiting'}
-		<form {onsubmit}>
-			<FileUpload onupload={(file) => entries.push(new Entry(file))} />
-			<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
-				Submit
-			</Button>
-		</form>
-	{/if}
-	{#if entries.length > 0 && entries.every((entry) => entry.status === 'success')}
-		<Button size="md" style="width: 100%">
-			Download All
-			<ArrowDownToLine style="" />
-		</Button>
+<div data-status={status}>
+	<Header />
+	<section>
+		<AddImages bind:entries />
+	</section>
+	{#if entries.length}
+		<section>
+			<ImageList bind:entries {status} />
+		</section>
 	{/if}
 </div>
 
 <style>
-	.container {
-		/* Appearance */
-		background-color: white;
-		border-radius: var(--radius-md);
-		box-shadow:
-			0px 0px 8px 2px var(--neutral-100),
-			0px 1px 2px 0px var(--neutral-300);
-
-		/* Layout */
-		display: flex;
-		flex-direction: column;
+	div {
+		/* Fill space */
+		width: 100%;
+		height: 100%;
 
 		/* Spacing */
-		padding: var(--size-8);
-		gap: var(--size-8);
-	}
+		padding: 1rem;
+		gap: 1rem;
 
-	form {
 		/* Layout */
-		display: flex;
-		flex-direction: column;
-
-		/* Spacing */
-		gap: var(--size-8);
+		display: grid;
+		grid-template-rows: auto auto 1fr;
+		grid-template-columns: 1fr;
 	}
 </style>

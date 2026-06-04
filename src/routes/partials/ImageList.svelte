@@ -1,0 +1,123 @@
+<script lang="ts">
+	import IconButton from '$lib/components/IconButton.svelte';
+	import type { Entry, Status } from '$lib/entry.svelte';
+	import { Trash2 } from '@lucide/svelte';
+
+	interface Props {
+		entries: Entry[];
+		status: Status;
+	}
+
+	let { entries = $bindable(), status }: Props = $props();
+</script>
+
+<div class="container">
+	<ul aria-label="Images">
+		{#each entries as entry (entry.id)}
+			<li>
+				{#if entry.status == 'processed'}
+					<img src={entry.srcOut} alt="Result" />
+				{:else}
+					<img src={entry.srcIn} alt="Input" />
+				{/if}
+				<div class="options">
+					<p>{entry.file.name}</p>
+					{#if entry.status == 'unprocessed'}
+						<IconButton
+							color="danger"
+							onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
+						>
+							<Trash2 />
+						</IconButton>
+					{/if}
+				</div>
+			</li>
+		{/each}
+	</ul>
+</div>
+
+<style>
+	.container {
+		/* Appearance */
+		background-color: white;
+		border-radius: var(--radius-md);
+		box-shadow:
+			0px 0px 8px 2px var(--neutral-100),
+			0px 1px 2px 0px var(--neutral-300);
+
+		/* Spacing */
+		padding: 2rem 1rem;
+	}
+
+	ul {
+		/* Reset styles */
+		list-style: none;
+
+		/* Layout */
+		display: grid;
+
+		/* Spacing */
+		gap: 2rem;
+	}
+
+	li {
+		/* Layout */
+		position: relative;
+
+		/* Border */
+		border: 1px solid var(--neutral-200);
+		border-radius: var(--radius-md);
+
+		box-shadow:
+			0px 0px 8px 1px var(--neutral-100),
+			0px 1px 2px 1px var(--neutral-200);
+	}
+
+	.options {
+		/* Position */
+		position: absolute;
+		bottom: 1rem;
+		left: 1rem;
+		right: 1rem;
+
+		/* Appearance */
+		background-color: white;
+		border-radius: var(--radius-md);
+		box-shadow: 0px 0px 2px 1px var(--neutral-200);
+
+		/* Spacing */
+		padding: 0.75rem 1rem;
+		gap: 1rem;
+
+		/* Layout */
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.options p {
+		/* Wrap filename */
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	img {
+		/* Fill space */
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		aspect-ratio: 1;
+
+		/* Border */
+		border-radius: var(--radius-sm);
+
+		/* Darken */
+		filter: brightness(80%);
+		transition: filter var(--transition-duration) ease-in-out;
+
+		li:hover & {
+			filter: none;
+		}
+	}
+</style>

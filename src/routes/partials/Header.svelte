@@ -2,25 +2,18 @@
 	import { Eraser } from '@lucide/svelte';
 </script>
 
-<div class="container">
-	<header>
-		<span>
-			<Eraser />
-		</span>
-		<div>
-			<nav>
-				<a href="https://github.com/aryaveersr">Github</a>
-			</nav>
-		</div>
-	</header>
-</div>
+<header>
+	<span>
+		<Eraser />
+	</span>
+	<div>
+		<nav>
+			<a href="https://github.com/aryaveersr">Github</a>
+		</nav>
+	</div>
+</header>
 
 <style>
-	.container {
-		/* Spacing */
-		padding: var(--size-4);
-	}
-
 	header {
 		/* Appearance */
 		background-color: white;
@@ -30,7 +23,7 @@
 			0px 1px 2px 0px var(--neutral-300);
 
 		/* Spacing */
-		padding: var(--size-3) var(--size-4);
+		padding: 1rem;
 
 		/* Layout */
 		display: flex;

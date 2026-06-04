@@ -40,7 +40,7 @@
 />
 
 <label bind:this={label} {ondrop}>
-	<div role="button" tabindex="0">
+	<div role="button" tabindex="0" class="focus-ring">
 		<span>
 			<Upload />
 		</span>
@@ -67,7 +67,7 @@
 	div {
 		/* Size */
 		width: 100%;
-		min-height: var(--size-64);
+		height: 16rem;
 
 		/* Appearance */
 		border-radius: var(--radius-md);
@@ -79,6 +79,9 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+
+		/* Spacing */
+		padding: 0.75rem;
 
 		/* Interaction */
 		cursor: pointer;
@@ -92,12 +95,6 @@
 			background-color: var(--neutral-100);
 			border-color: var(--neutral-400);
 		}
-
-		&:focus-visible {
-			/* Outline styles for focus ring */
-			outline: 2px solid var(--neutral-600);
-			outline-offset: 2px;
-		}
 	}
 
 	span {
@@ -106,7 +103,7 @@
 		height: 1rem;
 
 		/* Margin */
-		margin-bottom: var(--size-6);
+		margin-bottom: 1.5rem;
 
 		/* Appearance */
 		color: var(--neutral-600);

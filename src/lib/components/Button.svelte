@@ -12,7 +12,7 @@
 	let { children, icon, size = 'sm', ...props }: Merge<Props, HTMLButtonAttributes> = $props();
 </script>
 
-<button {...props} class={[`size-${size}`]}>
+<button {...props} class="focus-ring" data-size={size}>
 	{@render children?.()}
 	{@render icon?.()}
 </button>
@@ -49,42 +49,36 @@
 			box-shadow: 0px 0px 4px 1px var(--neutral-300);
 		}
 
-		&:focus-visible {
-			/* Outline styles for focus ring */
-			outline: 2px solid var(--neutral-600);
-			outline-offset: 1px;
-		}
-
 		&:active {
 			background-color: var(--neutral-600);
 			box-shadow: inset 0px 0px 2px 2px var(--neutral-400);
 		}
 
-		/* Size Variants */
-
-		&.size-sm {
-			font-size: var(--text-sm);
-			padding: var(--size-2) var(--size-4);
-			gap: var(--size-2);
-
-			& :global(.lucide) {
-				width: var(--size-3);
-			}
-		}
-
-		&.size-md {
-			font-size: var(--text-normal);
-			padding: var(--size-3) var(--size-6);
-			gap: var(--size-4);
-
-			& :global(.lucide) {
-				width: var(--size-4);
-			}
-		}
-
 		&:disabled {
 			opacity: 0.5;
 			pointer-events: none;
+		}
+
+		/* Size Variants */
+
+		&[data-size='sm'] {
+			font-size: var(--text-sm);
+			padding: 0.5rem 1rem;
+			gap: 0.5rem;
+
+			& :global(.lucide) {
+				width: 0.75rem;
+			}
+		}
+
+		&[data-size='md'] {
+			font-size: var(--text-normal);
+			padding: 0.75rem 1.5rem;
+			gap: 1rem;
+
+			& :global(.lucide) {
+				width: 1rem;
+			}
 		}
 	}
 </style>

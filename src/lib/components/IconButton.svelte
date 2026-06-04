@@ -5,12 +5,13 @@
 
 	interface Props {
 		children?: Snippet;
+		color?: 'neutral' | 'danger';
 	}
 
-	let { children, ...props }: Merge<Props, HTMLButtonAttributes> = $props();
+	let { children, color = 'neutral', ...props }: Merge<Props, HTMLButtonAttributes> = $props();
 </script>
 
-<button {...props}>
+<button {...props} class="focus-ring" data-color={color}>
 	{@render children?.()}
 </button>
 
@@ -27,30 +28,33 @@
 		outline: none;
 		border-radius: var(--radius-sm);
 
-		/* Spacing */
-		padding: var(--size-1) var(--size-2);
-
 		/* Interaction */
 		cursor: pointer;
+		transition: all var(--transition-duration) ease-in-out;
 
-		transition:
-			background-color var(--transition-duration) ease-in-out,
-			box-shadow var(--transition-duration) ease-in-out;
+		padding: 0.25rem 0.5rem;
 
 		& :global(.lucide) {
-			width: var(--size-4);
+			width: 1rem;
 		}
 
-		&:hover,
-		&:focus {
-			background-color: var(--neutral-100);
-			box-shadow: 0px 1px 1px 0px var(--neutral-200);
+		/* Color Varaints */
+
+		&[data-color='neutral'] {
+			&:hover,
+			&:focus {
+				background-color: var(--neutral-100);
+				box-shadow: 0px 1px 1px 0px var(--neutral-200);
+			}
 		}
 
-		&:focus-visible {
-			/* Outline styles for focus ring */
-			outline: 2px solid var(--neutral-600);
-			outline-offset: 1px;
+		&[data-color='danger'] {
+			&:hover,
+			&:focus {
+				background-color: var(--red-100);
+				box-shadow: 0px 1px 1px 0px var(--red-200);
+				color: var(--red-600);
+			}
 		}
 	}
 </style>

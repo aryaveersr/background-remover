@@ -32,3 +32,9 @@ textarea {
 	font-family: inherit;
 	font-size: inherit;
 }
+
+.focus-ring:focus-visible {
+	/* Outline styles for focus ring */
+	outline: 2px solid var(--neutral-600);
+	outline-offset: 2px;
+}

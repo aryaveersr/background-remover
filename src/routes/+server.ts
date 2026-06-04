@@ -16,6 +16,7 @@ async function getPipeline() {
 async function removeBackground(image: RawImage) {
 	if (process.env.NODE_ENV === 'development') {
 		await new Promise((resolve) => setTimeout(resolve, 2000));
+		image.rgba().grayscale();
 	} else {
 		const imagePipeline = await getPipeline();
 		const mask = await imagePipeline(image).then((res) => res[0].mask);
