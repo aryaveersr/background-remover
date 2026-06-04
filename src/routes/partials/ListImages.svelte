@@ -25,7 +25,7 @@
 	{#if status === 'processed'}
 		<Button
 			size="md"
-			style="width: 100%"
+			style="width: 100%; margin-inline: 0.5rem;"
 			onclick={() => entries.forEach((entry) => entry.download())}
 		>
 			Download all
@@ -73,7 +73,7 @@
 			0px 1px 2px 0px var(--neutral-300);
 
 		/* Spacing */
-		padding: 1rem;
+		padding: 1rem 0.5rem 0.5rem 0.5rem;
 		gap: 1rem;
 
 		/* Layout */
@@ -95,6 +95,9 @@
 		/* Font */
 		font-size: var(--text-lg);
 		font-weight: 500;
+
+		/* Spacing */
+		padding-inline: 0.5rem;
 	}
 
 	ul {
@@ -107,6 +110,7 @@
 
 		/* Spacing */
 		gap: 2rem;
+		padding: 0.5rem;
 	}
 
 	li {
