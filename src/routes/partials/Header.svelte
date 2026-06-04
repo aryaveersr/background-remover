@@ -8,7 +8,7 @@
 	</span>
 	<div>
 		<nav>
-			<a href="https://github.com/aryaveersr">Github</a>
+			<a class="focus-ring" href="https://github.com/aryaveersr">Github</a>
 		</nav>
 	</div>
 </header>
@@ -23,7 +23,7 @@
 			0px 1px 2px 0px var(--neutral-300);
 
 		/* Spacing */
-		padding: 1rem;
+		padding: 0.75rem;
 
 		/* Layout */
 		display: flex;
@@ -43,5 +43,15 @@
 		/* Appearance */
 		color: var(--neutral-700);
 		text-decoration: none;
+		border-radius: var(--radius-sm);
+
+		/* Spacing */
+padding: 0.5rem 0.75rem;
+
+		transition: background-color var(--transition-duration) ease-in-out;
+
+		&:hover {
+			background-color: var(--neutral-100);
+		}
 	}
 </style>
