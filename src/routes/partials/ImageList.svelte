@@ -1,7 +1,7 @@
 <script lang="ts">
 	import IconButton from '$lib/components/IconButton.svelte';
 	import type { Entry, Status } from '$lib/entry.svelte';
-	import { Trash2 } from '@lucide/svelte';
+	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
 
 	interface Props {
 		entries: Entry[];
@@ -28,6 +28,10 @@
 							onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
 						>
 							<Trash2 />
+						</IconButton>
+					{:else if entry.status == 'processed'}
+						<IconButton onclick={() => entry.download()}>
+							<ArrowDownToLine />
 						</IconButton>
 					{/if}
 				</div>
