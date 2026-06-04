@@ -2,7 +2,7 @@
 	import type { Entry, Status } from '$lib/entry.svelte';
 	import AddImages from './partials/AddImages.svelte';
 	import Header from './partials/Header.svelte';
-	import ImageList from './partials/ImageList.svelte';
+	import ListImages from './partials/ListImages.svelte';
 
 	let entries = $state<Entry[]>([]);
 	let status = $derived<Status>(
@@ -19,7 +19,7 @@
 	{/if}
 	{#if entries.length}
 		<section>
-			<ImageList bind:entries {status} />
+			<ListImages bind:entries {status} />
 		</section>
 	{/if}
 </div>
@@ -36,7 +36,13 @@
 
 		/* Layout */
 		display: grid;
-		grid-template-rows: auto auto 1fr;
+		grid-template-rows: auto 1fr;
 		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 800px) {
+		div {
+			grid-template-columns: minmax(auto, 480px) auto;
+		}
 	}
 </style>

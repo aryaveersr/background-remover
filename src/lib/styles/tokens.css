@@ -43,4 +43,9 @@
 
 	/* Transitions */
 	--transition-duration: 0.25s;
+
+	/* Breakpoints */
+	/* You cannot actually use these in media queries,
+	   they're here for reference. */
+	--breakpoint-sm: 640px;
 }

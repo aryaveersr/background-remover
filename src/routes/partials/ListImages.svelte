@@ -95,6 +95,7 @@
 
 		/* Layout */
 		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
 
 		/* Spacing */
 		gap: 2rem;

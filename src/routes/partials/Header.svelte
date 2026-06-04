@@ -29,6 +29,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		grid-column: 1 / -1;
 	}
 
 	span {
@@ -46,7 +47,7 @@
 		border-radius: var(--radius-sm);
 
 		/* Spacing */
-padding: 0.5rem 0.75rem;
+		padding: 0.5rem 0.75rem;
 
 		transition: background-color var(--transition-duration) ease-in-out;
 
