@@ -48,4 +48,5 @@
 	/* You cannot actually use these in media queries,
 	   they're here for reference. */
 	--breakpoint-sm: 640px;
+	--breakpoint-md: 800px;
 }

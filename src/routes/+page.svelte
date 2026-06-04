@@ -39,7 +39,7 @@
 
 		/* Layout */
 		display: grid;
-		grid-template-rows: repeat(2, max-content);
+		grid-template-rows: min-content auto;
 		grid-template-columns: 1fr;
 	}
 
@@ -49,6 +49,7 @@
 
 	@media (min-width: 800px) {
 		div {
+			grid-template-rows: min-content minmax(0, min-content);
 			grid-template-columns: minmax(auto, 480px) auto;
 		}
 

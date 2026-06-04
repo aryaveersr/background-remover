@@ -62,6 +62,9 @@
 
 <style>
 	.container {
+		/* Fill height */
+		height: 100%;
+
 		/* Appearance */
 		background-color: white;
 		border-radius: var(--radius-md);
@@ -164,6 +167,17 @@
 
 		li:hover & {
 			filter: none;
+		}
+	}
+
+	@media (min-width: 800px) {
+		ul {
+			overflow-y: auto;
+		}
+
+		li:only-child {
+			height: unset;
+			width: min(32rem, 100%);
 		}
 	}
 </style>
