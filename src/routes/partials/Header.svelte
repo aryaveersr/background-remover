@@ -49,7 +49,7 @@
 		/* Spacing */
 		padding: 0.5rem 0.75rem;
 
-		transition: background-color var(--transition-duration) ease-in-out;
+		transition: all var(--transition);
 
 		&:hover {
 			background-color: var(--neutral-100);

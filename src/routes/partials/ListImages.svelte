@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import IconButton from '$lib/components/IconButton.svelte';
 	import type { Entry, Status } from '$lib/entry.svelte';
 	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
 
@@ -16,10 +15,7 @@
 	<header>
 		<h2>Images</h2>
 		{#if entries.length}
-			<Button theme="subtle" onclick={() => (entries = [])}>
-				Clear all
-				<Trash2 />
-			</Button>
+			<Button kind="subtle" onclick={() => (entries = [])}>Clear all</Button>
 		{/if}
 	</header>
 	{#if status === 'processed'}
@@ -43,16 +39,18 @@
 				<div class="options">
 					<p>{entry.file.name}</p>
 					{#if entry.status == 'unprocessed'}
-						<IconButton
+						<Button
+							icon
+							kind="subtle"
 							color="danger"
 							onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
 						>
 							<Trash2 />
-						</IconButton>
+						</Button>
 					{:else if entry.status == 'processed'}
-						<IconButton onclick={() => entry.download()}>
+						<Button icon kind="subtle" onclick={() => entry.download()}>
 							<ArrowDownToLine />
-						</IconButton>
+						</Button>
 					{/if}
 				</div>
 			</li>
@@ -89,15 +87,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		/* Spacing */
+		padding-inline: 0.5rem;
 	}
 
 	header h2 {
 		/* Font */
 		font-size: var(--text-lg);
 		font-weight: 500;
-
-		/* Spacing */
-		padding-inline: 0.5rem;
 	}
 
 	ul {
@@ -167,7 +165,7 @@
 
 		/* Darken */
 		filter: brightness(80%);
-		transition: filter var(--transition-duration) ease-in-out;
+		transition: all var(--transition);
 
 		li:hover & {
 			filter: none;

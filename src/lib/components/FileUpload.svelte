@@ -86,9 +86,7 @@
 		/* Interaction */
 		cursor: pointer;
 
-		transition:
-			background-color var(--transition-duration) ease-in-out,
-			border-color var(--transition-duration) ease-in-out;
+		transition: all var(--transition);
 
 		&:hover,
 		&:focus {

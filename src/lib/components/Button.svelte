@@ -5,93 +5,163 @@
 
 	interface Props {
 		children?: Snippet;
-		icon?: Snippet;
+		icon?: boolean;
 		size?: 'sm' | 'md';
-		theme?: 'filled' | 'subtle';
+		kind?: 'filled' | 'subtle';
+		color?: 'neutral' | 'danger';
 	}
 
 	let {
 		children,
-		icon,
+		icon = false,
 		size = 'sm',
-		theme = 'filled',
+		kind = 'filled',
+		color = 'neutral',
 		...props
 	}: Merge<Props, HTMLButtonAttributes> = $props();
 </script>
 
-<button {...props} class="focus-ring" data-size={size} data-theme={theme}>
+<button
+	{...props}
+	class="focus-ring"
+	data-size={size}
+	data-kind={kind}
+	data-icon={icon}
+	data-color={color}
+>
 	{@render children?.()}
-	{@render icon?.()}
 </button>
 
 <style>
+	/* Color and kind variants */
+
+	[data-color='neutral'] {
+		&[data-kind='filled'] {
+			--btn-bg: var(--neutral-800);
+			--btn-color: var(--neutral-50);
+			--btn-shadow-color: var(--neutral-400);
+
+			--btn-hover-bg: var(--neutral-700);
+			--btn-hover-shadow-color: var(--neutral-300);
+
+			--btn-active-bg: var(--neutral-600);
+			--btn-active-shadow-color: var(--neutral-400);
+		}
+
+		&[data-kind='subtle'] {
+			--btn-bg: var(--neutral-100);
+			--btn-color: var(--neutral-800);
+			--btn-shadow-color: transparent;
+
+			--btn-hover-bg: var(--neutral-200);
+			--btn-hover-shadow-color: transparent;
+
+			--btn-active-bg: var(--neutral-300);
+			--btn-active-shadow-color: transparent;
+		}
+	}
+
+	[data-color='danger'] {
+		&[data-kind='filled'] {
+			--btn-bg: var(--red-800);
+			--btn-color: var(--red-50);
+			--btn-shadow-color: var(--red-400);
+
+			--btn-hover-bg: var(--red-700);
+			--btn-hover-shadow-color: var(--red-300);
+
+			--btn-active-bg: var(--red-600);
+			--btn-active-shadow-color: var(--red-400);
+		}
+
+		&[data-kind='subtle'] {
+			--btn-bg: var(--red-100);
+			--btn-color: var(--red-800);
+			--btn-shadow-color: transparent;
+
+			--btn-hover-bg: var(--red-200);
+			--btn-hover-shadow-color: transparent;
+
+			--btn-active-bg: var(--red-300);
+			--btn-active-shadow-color: transparent;
+		}
+	}
+
+	/* Size and icon variants */
+
+	[data-icon='false'] {
+		&[data-size='sm'] {
+			--btn-font-size: var(--text-sm);
+			--btn-padding: 0.5rem 1rem;
+		}
+
+		&[data-size='md'] {
+			--btn-font-size: var(--text-normal);
+			--btn-padding: 0.75rem 1.5rem;
+		}
+	}
+
+	[data-icon='true'] {
+		&[data-size='sm'] {
+			--btn-font-size: var(--text-sm);
+			--btn-padding: 0.5rem;
+		}
+
+		&[data-size='md'] {
+			--btn-font-size: var(--text-normal);
+			--btn-padding: 0.75rem;
+		}
+	}
+
+	/* Base styles */
+
 	button {
 		/* Border */
 		border: none;
 		border-radius: var(--radius-sm);
 
-		/* Interactions */
-		cursor: pointer;
-
-		/* Font and icons */
-		font-size: var(--btn-size);
-
-		& :global(.lucide) {
-			width: var(--btn-size);
-			height: var(--btn-size);
-			margin-bottom: 1px; /* Minor adjustment for alignment */
-		}
+		/* Appearance */
+		color: var(--btn-color);
+		background-color: var(--btn-bg);
+		box-shadow: 0px 1px 1px 1px var(--btn-shadow-color);
 
 		/* Spacing */
-		gap: var(--btn-size);
+		padding: var(--btn-padding);
+		gap: var(--btn-font-size);
 
 		/* Layout */
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 
-		transition:
-			background-color var(--transition-duration) ease-in-out,
-			box-shadow var(--transition-duration) ease-in-out,
-			outline var(--transition-duration) ease-in-out;
+		/* Interactions */
+		cursor: pointer;
+		transition: all var(--transition);
+
+		/* Font  */
+		font-size: var(--btn-font-size);
+
+		&:hover,
+		&:focus {
+			background-color: var(--btn-hover-bg);
+			box-shadow: 0px 0px 4px 1px var(--btn-hover-shadow-color);
+		}
+
+		&:active {
+			background-color: var(--btn-active-bg);
+			box-shadow: inset 0px 0px 2px 2px var(--btn-active-shadow-color);
+		}
 
 		&:disabled {
 			opacity: 0.5;
 			pointer-events: none;
+			box-shadow: none;
 		}
 
-		/* Size Variants */
-
-		&[data-size='sm'] {
-			--btn-size: var(--text-sm);
-			padding: 0.5rem 1rem;
-		}
-
-		&[data-size='md'] {
-			--btn-size: var(--text-normal);
-			padding: 0.75rem 1.5rem;
-		}
-
-		/* Theme variants */
-
-		&[data-theme='filled'] {
-			/* Colors */
-			color: var(--neutral-50);
-			background-color: var(--neutral-800);
-
-			/* Shadow */
-			box-shadow: 0px 1px 1px 1px var(--neutral-400);
-
-			&:hover,
-			&:focus {
-				background-color: var(--neutral-700);
-				box-shadow: 0px 0px 4px 1px var(--neutral-300);
-			}
-
-			&:active {
-				background-color: var(--neutral-600);
-				box-shadow: inset 0px 0px 2px 2px var(--neutral-400);
-			}
+		/* Icon */
+		& :global(.lucide) {
+			width: var(--btn-font-size);
+			height: var(--btn-font-size);
 		}
 	}
 </style>

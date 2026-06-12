@@ -42,7 +42,7 @@
 	--radius-md: 0.5rem; /* 8px */
 
 	/* Transitions */
-	--transition-duration: 0.25s;
+	--transition: 0.25s ease-in-out;
 
 	/* Breakpoints */
 	/* You cannot actually use these in media queries,
