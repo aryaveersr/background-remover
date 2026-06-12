@@ -43,4 +43,11 @@
 		font-size: var(--text-lg);
 		font-weight: 500;
 	}
+
+	@media (min-width: 900px) {
+		form {
+			/* Take all space*/
+			height: 100%;
+		}
+	}
 </style>

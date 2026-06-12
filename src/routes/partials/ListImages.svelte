@@ -183,4 +183,12 @@
 		object-fit: cover;
 		aspect-ratio: 1;
 	}
+
+	@media (min-width: 900px) {
+		.container {
+			/* Force scrolling */
+			height: 100%;
+			overflow-y: auto;
+		}
+	}
 </style>
