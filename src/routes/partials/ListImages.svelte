@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import Progress from '$lib/components/Progress.svelte';
 	import type { Entry } from '$lib/entry.svelte';
 	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
 
@@ -51,6 +52,11 @@
 								</Button>
 							</figcaption>
 						</figure>
+						<Progress
+							aria-label="Upload progress"
+							aria-hidden={entry.status == 'unprocessed'}
+							value={entry.progress}
+						/>
 					</li>
 				{/each}
 			</ul>
@@ -84,6 +90,7 @@
 								</Button>
 							</figcaption>
 						</figure>
+						<Progress aria-hidden="true" value={0} />
 					</li>
 				{/each}
 			</ul>
@@ -161,14 +168,14 @@
 		padding-block: 1rem;
 	}
 
-	figure {
+	li {
 		/* Appearance */
 		background-color: white;
 	}
 
 	figcaption {
 		/* Spacing */
-		padding: 0.5rem 0.5rem 0.75rem 0.75rem;
+		padding: 0.5rem 0.5rem 0.5rem 0.75rem;
 		gap: 1rem;
 
 		/* Layout */
