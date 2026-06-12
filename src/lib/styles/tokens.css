@@ -36,17 +36,4 @@
 	--text-2xl: 1.875rem; /* 30px */
 	--text-3xl: 2.25rem; /* 36px */
 	--text-4xl: 3rem; /* 48px */
-
-	/* Radii */
-	--radius-sm: 0.25rem; /* 4px */
-	--radius-md: 0.5rem; /* 8px */
-
-	/* Transitions */
-	--transition: 0.25s ease-in-out;
-
-	/* Breakpoints */
-	/* You cannot actually use these in media queries,
-	   they're here for reference. */
-	--breakpoint-sm: 640px;
-	--breakpoint-md: 800px;
 }

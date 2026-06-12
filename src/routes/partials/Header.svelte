@@ -3,41 +3,30 @@
 </script>
 
 <header>
-	<span>
-		<Eraser />
-	</span>
+	<Eraser />
 	<div>
 		<nav>
-			<a class="focus-ring" href="https://github.com/aryaveersr">Github</a>
+			<a href="https://github.com/aryaveersr/background-remover">Github</a>
 		</nav>
 	</div>
 </header>
 
 <style>
 	header {
+		/* Fill row when on desktop. Has no effect on mobile */
+		grid-column: 1 / -1;
+
 		/* Appearance */
 		background-color: white;
-		border-radius: var(--radius-md);
-		box-shadow:
-			0px 0px 8px 2px var(--neutral-100),
-			0px 1px 2px 0px var(--neutral-300);
+		border-bottom: 1px solid var(--neutral-200);
 
 		/* Spacing */
-		padding: 0.75rem;
+		padding: 1rem 1.5rem;
 
 		/* Layout */
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		grid-column: 1 / -1;
-	}
-
-	span {
-		/* Wrap the icon without affecting the layout */
-		display: contents;
-
-		/* Appearance */
-		color: var(--neutral-700);
 	}
 
 	a {
@@ -49,10 +38,16 @@
 		/* Spacing */
 		padding: 0.5rem 0.75rem;
 
-		transition: all var(--transition);
+		/* Interaction */
+		transition: background-color 0.2s ease-in-out;
 
 		&:hover {
 			background-color: var(--neutral-100);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--neutral-600);
+			outline-offset: 1px;
 		}
 	}
 </style>

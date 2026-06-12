@@ -40,12 +40,12 @@
 />
 
 <label bind:this={label} {ondrop}>
-	<div role="button" tabindex="0" class="focus-ring">
+	<div role="button" tabindex="0">
 		<span>
 			<Upload />
 		</span>
 		<p>Click or drag and drop images here...</p>
-		<p class="subtle">.png,.jpg supported</p>
+		<small>.png,.jpg supported</small>
 	</div>
 	<input
 		type="file"
@@ -70,8 +70,7 @@
 		height: 16rem;
 
 		/* Appearance */
-		border-radius: var(--radius-md);
-		border: 1.5px dashed var(--neutral-300);
+		border-bottom: 3px solid var(--neutral-200);
 		background-color: var(--neutral-50);
 
 		/* Layout */
@@ -79,41 +78,42 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		text-align: center;
 
 		/* Spacing */
 		padding: 0.75rem;
 
 		/* Interaction */
 		cursor: pointer;
-
-		transition: all var(--transition);
+		transition:
+			background-color 0.2s ease-in-out,
+			border-color 0.2s ease-in-out;
 
 		&:hover,
 		&:focus {
 			background-color: var(--neutral-100);
-			border-color: var(--neutral-400);
+			border-color: var(--neutral-300);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--neutral-600);
+			outline-offset: 2px;
 		}
 	}
 
 	span {
-		/* Size */
-		width: 1rem;
-		height: 1rem;
-
-		/* Margin */
-		margin-bottom: 1.5rem;
-
 		/* Appearance */
 		color: var(--neutral-600);
+
+		/* Spacing */
+		margin-bottom: 0.5rem;
 	}
 
-	p {
-		text-align: center;
-	}
-
-	p.subtle {
+	small {
 		/* Appearance */
 		color: var(--neutral-500);
+
+		/* Font */
 		font-size: var(--text-sm);
 	}
 </style>

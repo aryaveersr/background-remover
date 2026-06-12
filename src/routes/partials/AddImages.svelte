@@ -27,10 +27,7 @@
 	form {
 		/* Appearance */
 		background-color: white;
-		border-radius: var(--radius-md);
-		box-shadow:
-			0px 0px 8px 2px var(--neutral-100),
-			0px 1px 2px 0px var(--neutral-300);
+		border-bottom: 1px solid var(--neutral-200);
 
 		/* Layout */
 		display: flex;
