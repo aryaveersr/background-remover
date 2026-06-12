@@ -48,6 +48,9 @@
 		form {
 			/* Take all space*/
 			height: 100%;
+
+			border-bottom: none;
+			border-right: 1px solid var(--neutral-200);
 		}
 	}
 </style>

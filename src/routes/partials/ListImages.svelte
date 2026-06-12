@@ -72,8 +72,8 @@
 					</Button>
 				</div>
 			</header>
-			<ul aria-label="Unprocessed images">
-				{#each unprocessed as entry (entry.id)}
+			<ul aria-label="Processed images">
+				{#each processed as entry (entry.id)}
 					<li>
 						<figure>
 							<img src={entry.srcIn} alt="" />
@@ -121,6 +121,14 @@
 
 		/* Spacing */
 		padding-block: 0.25rem;
+	}
+
+	header > div {
+		/* Layout */
+		display: flex;
+
+		/* Spacing */
+		gap: 1rem;
 	}
 
 	h2 {
