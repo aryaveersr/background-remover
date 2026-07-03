@@ -19,6 +19,16 @@
 	}
 </script>
 
+<svelte:window
+	onpaste={(ev) => {
+		for (const item of ev.clipboardData!.items) {
+			if (item.kind != 'file') return;
+			if (!['image/png', 'image/jpeg'].includes(item.type)) return;
+			entries.push(new Entry(item.getAsFile()!));
+		}
+	}}
+/>
+
 <form
 	onsubmit={(ev) => {
 		ev.preventDefault();
@@ -48,6 +58,9 @@
 				<Plus />
 			</Button>
 		</div>
+
+		<br />
+		<p>Or paste images directly from your clipboard.</p>
 	</div>
 	<div>
 		<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
