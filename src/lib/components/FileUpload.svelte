@@ -6,9 +6,10 @@
 	}
 
 	let { onupload = () => {} }: Props = $props();
-	let label: HTMLLabelElement;
+</script>
 
-	function ondrop(ev: DragEvent) {
+<svelte:window
+	ondrop={(ev) => {
 		const files = [...ev.dataTransfer!.items].filter((item) => item.kind === 'file');
 		if (files.length > 0) {
 			ev.preventDefault();
@@ -20,26 +21,15 @@
 				ev.dataTransfer!.dropEffect = 'none';
 			}
 		}
-	}
-</script>
-
-<svelte:window
-	ondrop={(ev) => {
-		if ([...ev.dataTransfer!.items].some((item) => item.kind === 'file')) {
-			ev.preventDefault();
-		}
 	}}
 	ondragover={(ev) => {
 		if ([...ev.dataTransfer!.items].some((item) => item.kind === 'file')) {
 			ev.preventDefault();
-			if (!label.contains(ev.target as Node)) {
-				ev.dataTransfer!.dropEffect = 'none';
-			}
 		}
 	}}
 />
 
-<label bind:this={label} {ondrop}>
+<label>
 	<div role="button" tabindex="0">
 		<span>
 			<Upload />
