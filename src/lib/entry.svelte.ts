@@ -21,6 +21,17 @@ export class Entry {
 		this.progress = $state(0);
 	}
 
+	static async fromUrl(url: string) {
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
+		const filename = new URL(url).pathname.split('/').pop() || 'Undefined';
+		const blob = await fetch(url).then((res) => res.blob());
+		const file = new File([blob], filename, {
+			type: blob.type
+		});
+
+		return new Entry(file);
+	}
+
 	upload() {
 		const xhr = new XMLHttpRequest();
 		const form = new FormData();

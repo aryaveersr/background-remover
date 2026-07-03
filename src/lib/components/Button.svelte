@@ -19,7 +19,7 @@
 	}: Merge<Props, HTMLButtonAttributes> = $props();
 </script>
 
-<button {...props} class="focus-ring" data-size={size} data-kind={kind} data-color={color}>
+<button {...props} data-size={size} data-kind={kind} data-color={color}>
 	{@render children?.()}
 </button>
 
