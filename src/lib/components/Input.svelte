@@ -18,7 +18,6 @@
 		border-bottom: 3px solid var(--neutral-200);
 		color: var(--neutral-800);
 		background-color: var(--neutral-50);
-		border-radius: var(--radius-sm);
 
 		/* Font */
 		font-size: var(--text-md);

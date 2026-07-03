@@ -71,7 +71,6 @@
 		border: none;
 		color: var(--btn-color);
 		background-color: var(--btn-bg);
-		border-radius: var(--radius-sm);
 
 		/* Font */
 		font-size: var(--btn-font-size);

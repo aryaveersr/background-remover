@@ -2,7 +2,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import Progress from '$lib/components/Progress.svelte';
 	import type { Entry } from '$lib/entry.svelte';
-	import { ArrowDownToLine, Trash2 } from '@lucide/svelte';
+	import { ArrowDownToLine, Images, Trash2 } from '@lucide/svelte';
 
 	interface Props {
 		entries: Entry[];
@@ -23,7 +23,12 @@
 		</header>
 	{:else}
 		<div class="placeholder">
-			<p>Upload images to get started.</p>
+			<div>
+				<span>
+					<Images />
+				</span>
+				<p>Upload images to get started.</p>
+			</div>
 		</div>
 	{/if}
 	{#if unprocessed.length}
@@ -151,8 +156,52 @@
 	}
 
 	.placeholder {
+		/* Size */
+		width: 100%;
+		height: 100%;
+
 		/* Hide placeholder on mobile */
 		display: none;
+
+		/* Layout */
+		justify-content: center;
+		align-items: center;
+
+		& div {
+			/* Size */
+			width: 50%;
+			height: 50%;
+
+			/* Layout */
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			/* Appearance */
+			background-color: white;
+
+			/* Spacing */
+			gap: 1.25rem;
+		}
+
+		& span {
+			/* Size */
+			aspect-ratio: 1;
+			font-size: 1.25rem;
+
+			/* Appearance */
+			background-color: var(--neutral-100);
+			border-radius: 100%;
+
+			/* Layout */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			/* Spacing */
+			padding: 1rem;
+		}
 	}
 
 	ul {
@@ -204,6 +253,11 @@
 			/* Force scrolling */
 			height: 100%;
 			overflow-y: auto;
+		}
+
+		.placeholder {
+			/* Show placeholder on desktop */
+			display: flex;
 		}
 	}
 </style>

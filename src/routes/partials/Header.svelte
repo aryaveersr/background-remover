@@ -33,7 +33,6 @@
 		/* Appearance */
 		color: var(--neutral-700);
 		text-decoration: none;
-		border-radius: var(--radius-sm);
 
 		/* Spacing */
 		padding: 0.5rem 0.75rem;
