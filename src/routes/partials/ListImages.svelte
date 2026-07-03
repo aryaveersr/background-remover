@@ -82,7 +82,7 @@
 				{#each processed as entry (entry.id)}
 					<li>
 						<figure>
-							<img src={entry.srcIn} alt="" />
+							<img src={entry.srcOut} alt="" />
 							<figcaption>
 								<p>{entry.file.name}</p>
 								<Button kind="ghost" onclick={() => entry.download()}>
