@@ -15,7 +15,7 @@
 	input {
 		/* Appearance */
 		border: 2px solid transparent;
-		border-bottom: 3px solid var(--neutral-200);
+		border-bottom: 2px solid var(--neutral-200);
 		color: var(--neutral-800);
 		background-color: var(--neutral-50);
 
