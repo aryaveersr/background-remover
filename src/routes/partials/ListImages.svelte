@@ -48,7 +48,7 @@
 						<figure>
 							<img src={entry.srcIn} alt="" />
 							<figcaption>
-								<p>{entry.file.name}</p>
+								<p title={entry.file.name}>{entry.file.name}</p>
 								<Button
 									kind="ghost"
 									onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
@@ -89,7 +89,7 @@
 						<figure>
 							<img src={entry.srcOut} alt="" />
 							<figcaption>
-								<p>{entry.file.name}</p>
+								<p title={entry.file.name}>{entry.file.name}</p>
 								<Button kind="ghost" onclick={() => entry.download()}>
 									<ArrowDownToLine />
 								</Button>
