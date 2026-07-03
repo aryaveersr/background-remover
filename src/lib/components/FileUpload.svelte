@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { supportedExtensions, supportedMimeTypes } from '$lib';
 	import { Upload } from '@lucide/svelte';
 
 	interface Props {
@@ -10,23 +11,16 @@
 
 <svelte:window
 	ondrop={(ev) => {
-		const files = [...ev.dataTransfer!.items].filter((item) => item.kind === 'file');
-		if (files.length > 0) {
-			ev.preventDefault();
-			const filteredFiles = files.filter((item) => item.type.startsWith('image/'));
-			if (filteredFiles.length > 0) {
-				ev.dataTransfer!.dropEffect = 'copy';
-				filteredFiles.forEach((item) => onupload(item.getAsFile()!));
-			} else {
-				ev.dataTransfer!.dropEffect = 'none';
-			}
-		}
+		ev.preventDefault();
+
+		const images = [...ev.dataTransfer!.items]
+			.filter((item) => item.kind === 'file')
+			.filter((item) => supportedMimeTypes.includes(item.type));
+
+		images.forEach((item) => onupload(item.getAsFile()!));
+		ev.dataTransfer!.dropEffect = images.length ? 'copy' : 'none';
 	}}
-	ondragover={(ev) => {
-		if ([...ev.dataTransfer!.items].some((item) => item.kind === 'file')) {
-			ev.preventDefault();
-		}
-	}}
+	ondragover={(ev) => ev.preventDefault()}
 />
 
 <label>
@@ -35,11 +29,11 @@
 			<Upload />
 		</span>
 		<p>Click or drag and drop images here...</p>
-		<small>.png,.jpg supported</small>
+		<small>{supportedExtensions} supported</small>
 	</div>
 	<input
 		type="file"
-		accept="image/png, image/jpeg"
+		accept={supportedMimeTypes.join(', ')}
 		multiple
 		onchange={(ev) => {
 			[...ev.currentTarget.files!].forEach(onupload);

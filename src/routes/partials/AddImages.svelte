@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { supportedMimeTypes } from '$lib';
 	import Button from '$lib/components/Button.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
 	import { Entry } from '$lib/entry.svelte';
@@ -15,7 +16,7 @@
 	onpaste={(ev) => {
 		for (const item of ev.clipboardData!.items) {
 			if (item.kind != 'file') return;
-			if (!['image/png', 'image/jpeg'].includes(item.type)) return;
+			if (!supportedMimeTypes.includes(item.type)) return;
 			entries.push(new Entry(item.getAsFile()!));
 		}
 	}}
