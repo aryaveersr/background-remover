@@ -59,7 +59,8 @@
 			</Button>
 		</div>
 
-		<br />
+		<hr />
+
 		<p>Or paste images directly from your clipboard.</p>
 	</div>
 	<div>
@@ -115,6 +116,7 @@
 
 		/* Spacing */
 		margin: 1rem;
+		margin-bottom: 0.5rem;
 	}
 
 	h2 {
