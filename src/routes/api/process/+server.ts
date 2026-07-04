@@ -1,12 +1,13 @@
 import { env, ImageSegmentationPipeline, pipeline, RawImage } from '@huggingface/transformers';
 import { error } from '@sveltejs/kit';
 import path from 'node:path';
+import type { RequestHandler } from './$types';
 
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const form = await request.formData();
 	const file = form.get('file');
 
-	if (!file || !(file instanceof File)) return error(400);
+	if (!(file instanceof File)) throw error(400);
 
 	const image = await RawImage.fromBlob(file);
 	await removeBackground(image);
