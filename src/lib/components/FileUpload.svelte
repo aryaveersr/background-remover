@@ -9,20 +9,6 @@
 	let { onupload = () => {} }: Props = $props();
 </script>
 
-<svelte:window
-	ondrop={(ev) => {
-		ev.preventDefault();
-
-		const images = [...ev.dataTransfer!.items]
-			.filter((item) => item.kind === 'file')
-			.filter((item) => supportedMimeTypes.includes(item.type));
-
-		images.forEach((item) => onupload(item.getAsFile()!));
-		ev.dataTransfer!.dropEffect = images.length ? 'copy' : 'none';
-	}}
-	ondragover={(ev) => ev.preventDefault()}
-/>
-
 <label>
 	<div role="button" tabindex="0">
 		<span>

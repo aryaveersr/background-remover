@@ -98,7 +98,7 @@
 		/* Sticky header */
 		position: sticky;
 		top: 0px;
-		z-index: 99;
+		z-index: 49;
 
 		/* Appearance */
 		background-color: white;

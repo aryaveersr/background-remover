@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Entry } from '$lib/entry.svelte';
 	import AddImages from './_partials/AddImages.svelte';
+	import DropImages from './_partials/DropImages.svelte';
 	import Header from './_partials/Header.svelte';
 	import ListImages from './_partials/ListImages.svelte';
 
@@ -9,6 +10,7 @@
 
 <div>
 	<Header />
+	<DropImages bind:entries />
 	<section>
 		<AddImages bind:entries />
 	</section>
