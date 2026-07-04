@@ -10,15 +10,9 @@
 </script>
 
 <label>
-	<div role="button" tabindex="0">
-		<span>
-			<Upload />
-		</span>
-		<p>Click or drag and drop images here...</p>
-		<small>{supportedExtensions} supported</small>
-	</div>
 	<input
 		type="file"
+		class="visually-hidden"
 		accept={supportedMimeTypes.join(', ')}
 		multiple
 		onchange={(ev) => {
@@ -26,14 +20,16 @@
 			ev.currentTarget.value = '';
 		}}
 	/>
+	<div>
+		<span>
+			<Upload />
+		</span>
+		<p>Click or drag and drop images here...</p>
+		<small>{supportedExtensions} supported</small>
+	</div>
 </label>
 
 <style>
-	input {
-		/* Hide the input */
-		display: none;
-	}
-
 	div {
 		/* Size */
 		width: 100%;
@@ -58,17 +54,17 @@
 		transition:
 			background-color 0.2s ease-in-out,
 			border-color 0.2s ease-in-out;
+	}
 
-		&:hover,
-		&:focus {
-			background-color: var(--neutral-100);
-			border-color: var(--neutral-300);
-		}
+	input:focus + div,
+	div:hover {
+		background-color: var(--neutral-100);
+		border-color: var(--neutral-300);
+	}
 
-		&:focus-visible {
-			outline: 2px solid var(--neutral-600);
-			outline-offset: 2px;
-		}
+	input:focus-visible + div {
+		outline: 2px solid var(--neutral-600);
+		outline-offset: 2px;
 	}
 
 	span {
