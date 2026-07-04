@@ -34,7 +34,7 @@
 			type="url"
 			name="url"
 			id="url-input"
-			placeholder="Paste URL here.."
+			placeholder="Enter URL here.."
 			value=""
 			style="width: 100%"
 			required

@@ -40,3 +40,8 @@ textarea {
 	width: 1em;
 	height: 1em;
 }
+
+::selection {
+	background-color: var(--neutral-800);
+	color: white;
+}
