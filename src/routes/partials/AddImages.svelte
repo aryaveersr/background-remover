@@ -33,16 +33,14 @@
 
 		<p>Or paste images directly from your clipboard.</p>
 	</div>
-	<div>
-		<Button
-			size="md"
-			style="width: 100%"
-			disabled={entries.length === 0}
-			onclick={() => entries.forEach((entry) => entry.upload())}
-		>
-			Remove Background
-		</Button>
-	</div>
+	<Button
+		size="md"
+		style="width: 100%"
+		disabled={entries.length === 0}
+		onclick={() => entries.forEach((entry) => entry.upload())}
+	>
+		Remove Background
+	</Button>
 </div>
 
 <style>
