@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	await removeBackground(image);
 	const buffer = await image.toSharp().png().toBuffer();
 
-	return new Response(buffer as unknown as ArrayBuffer, {
+	return new Response(new Uint8Array(buffer), {
 		status: 200,
 		headers: { 'Content-Type': 'image/png' }
 	});
