@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { supportedMimeTypes } from '$lib';
 	import Button from '$lib/components/Button.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
 	import { Entry } from '$lib/entry.svelte';
@@ -11,16 +10,6 @@
 
 	let { entries = $bindable() }: Props = $props();
 </script>
-
-<svelte:window
-	onpaste={(ev) => {
-		for (const item of ev.clipboardData!.items) {
-			if (item.kind != 'file') return;
-			if (!supportedMimeTypes.includes(item.type)) return;
-			entries.push(new Entry(item.getAsFile()!));
-		}
-	}}
-/>
 
 <div class="container">
 	<div class="top">
