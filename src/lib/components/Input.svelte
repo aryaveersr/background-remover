@@ -6,10 +6,14 @@
 		value?: string;
 	}
 
-	let { value = $bindable(), ...props }: Merge<Props, HTMLInputAttributes> = $props();
+	let {
+		value = $bindable(),
+		type = 'text',
+		...props
+	}: Merge<Props, HTMLInputAttributes> = $props();
 </script>
 
-<input bind:value type="text" {...props} />
+<input bind:value {type} {...props} />
 
 <style>
 	input {
@@ -54,6 +58,10 @@
 		&:focus-visible {
 			outline: none;
 			border-color: var(--neutral-600);
+		}
+
+		&:user-invalid {
+			border-color: var(--red-600);
 		}
 	}
 </style>

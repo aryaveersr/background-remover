@@ -9,6 +9,7 @@
 	}
 
 	let { entries = $bindable() }: Props = $props();
+	let err = $state('');
 </script>
 
 <form
@@ -16,19 +17,37 @@
 		const form = ev.currentTarget;
 		const url = new FormData(form).get('url') as string;
 
-		const entry = await Entry.fromUrl(url);
-		entries.push(entry);
-
-		form.reset();
+		try {
+			const entry = await Entry.fromUrl(url);
+			entries.push(entry);
+			form.reset();
+			err = '';
+		} catch (e) {
+			console.error(e);
+			err = (e as Error).message;
+		}
 	}}
 >
 	<label for="url-input">Add image from URL</label>
 	<div>
-		<Input name="url" id="url-input" placeholder="Paste URL here.." style="width: 100%" />
+		<Input
+			type="url"
+			name="url"
+			id="url-input"
+			placeholder="Paste URL here.."
+			value=""
+			style="width: 100%"
+			required
+			aria-describedby={err.length ? 'url-err' : undefined}
+			aria-invalid={err.length ? true : undefined}
+		/>
 		<Button size="md" kind="subtle">
 			<Plus />
 		</Button>
 	</div>
+	{#if err.length}
+		<span id="url-err" role="alert">{err}</span>
+	{/if}
 </form>
 
 <style>
@@ -46,5 +65,10 @@
 		/* Spacing */
 		margin-left: 1px;
 		margin-bottom: 0.5rem;
+	}
+
+	span {
+		/* Appearance */
+		color: var(--red-600);
 	}
 </style>
