@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { Entry } from '$lib/entry.svelte';
-	import AddImages from './_partials/AddImages.svelte';
-	import DropHandler from './_partials/DropHandler.svelte';
-	import Header from './_partials/Header.svelte';
-	import ListImages from './_partials/ListImages.svelte';
-	import PasteHandler from './_partials/PasteHandler.svelte';
+	import AddImages from './AddImages.svelte';
+	import DropHandler from './DropHandler.svelte';
+	import Header from './Header.svelte';
+	import ListImages from './ListImages.svelte';
+	import PasteHandler from './PasteHandler.svelte';
 
 	let entries = $state<Entry[]>([]);
 </script>
