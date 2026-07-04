@@ -1,3 +1,5 @@
+import { supportedMimeTypes } from '$lib';
+
 export type Status = 'unprocessed' | 'processing' | 'processed';
 
 export class Entry {
@@ -24,7 +26,15 @@ export class Entry {
 	static async fromUrl(url: string) {
 		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const filename = new URL(url).pathname.split('/').pop() || 'Undefined';
-		const blob = await fetch(url).then((res) => res.blob());
+
+		const blob = await fetch('/api/proxy', {
+			headers: { 'X-Proxy-Url': url }
+		}).then((res) => res.blob());
+
+		if (!supportedMimeTypes.includes(blob.type)) {
+			throw new Error(`URL returned ${blob.type} instead of an image`);
+		}
+
 		const file = new File([blob], filename, {
 			type: blob.type
 		});
@@ -51,7 +61,7 @@ export class Entry {
 		});
 
 		xhr.responseType = 'blob';
-		xhr.open('POST', '/');
+		xhr.open('POST', '/api/process');
 		xhr.send(form);
 	}
 
