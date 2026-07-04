@@ -12,8 +12,8 @@
 <svelte:window
 	onpaste={(ev) => {
 		for (const item of ev.clipboardData!.items) {
-			if (item.kind != 'file') return;
-			if (!supportedMimeTypes.includes(item.type)) return;
+			if (item.kind != 'file') continue;
+			if (!supportedMimeTypes.includes(item.type)) continue;
 			entries.push(new Entry(item.getAsFile()!));
 		}
 	}}
