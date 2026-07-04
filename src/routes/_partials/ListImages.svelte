@@ -35,12 +35,7 @@
 		<section>
 			<header>
 				<h3>Unprocessed</h3>
-				<Button
-					kind="ghost"
-					onclick={() => (entries = entries.filter((entry) => entry.status == 'processed'))}
-				>
-					Clear
-				</Button>
+				<Button kind="ghost" onclick={() => (entries = processed)}>Clear</Button>
 			</header>
 			<ul aria-label="Unprocessed images">
 				{#each unprocessed as entry (entry.id)}
@@ -72,12 +67,7 @@
 			<header>
 				<h3>Processed</h3>
 				<div>
-					<Button
-						kind="ghost"
-						onclick={() => (entries = entries.filter((entry) => entry.status != 'processed'))}
-					>
-						Clear
-					</Button>
+					<Button kind="ghost" onclick={() => (entries = unprocessed)}>Clear</Button>
 					<Button kind="filled" onclick={() => processed.forEach((entry) => entry.download())}>
 						Download all
 					</Button>
