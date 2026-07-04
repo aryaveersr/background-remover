@@ -41,8 +41,10 @@
 	}
 
 	label {
+		display: block;
+
 		/* Spacing */
-		margin-bottom: -0.25rem;
 		margin-left: 1px;
+		margin-bottom: 0.5rem;
 	}
 </style>
