@@ -68,6 +68,14 @@
 	}
 
 	span {
+		display: block;
+
+		/* Spacing */
+		margin-left: 1px;
+		margin-top: 0.5rem;
+	}
+
+	span {
 		/* Appearance */
 		color: var(--red-600);
 	}
