@@ -49,6 +49,8 @@ export class Entry {
 	}
 
 	upload() {
+		if (this.status != 'unprocessed') return;
+
 		const xhr = new XMLHttpRequest();
 		const form = new FormData();
 

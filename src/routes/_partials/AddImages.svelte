@@ -26,9 +26,7 @@
 		size="md"
 		style="width: 100%"
 		disabled={entries.length === 0}
-		onclick={() => {
-			entries.filter((entry) => entry.status == 'unprocessed').forEach((entry) => entry.upload());
-		}}
+		onclick={() => entries.forEach((entry) => entry.upload())}
 	>
 		Remove Background
 	</Button>
