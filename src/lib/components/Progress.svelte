@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Merge } from '$lib/utils/merge';
+	import type { Merge } from '$lib';
 	import type { AriaAttributes } from 'svelte/elements';
 
 	interface Props {

@@ -7,3 +7,5 @@ export const supportedMimeTypes = [
 ];
 
 export const supportedExtensions = '.png, .jpg/jpeg, .webp, .avif, .tif/tiff';
+
+export type Merge<A, B> = A & Omit<B, keyof A>;
