@@ -25,11 +25,17 @@ export class Entry {
 
 	static async fromUrl(url: string) {
 		// eslint-disable-next-line svelte/prefer-svelte-reactivity
-		const filename = new URL(url).pathname.split('/').pop() || 'Undefined';
+		const filename = new URL(url).pathname.split('/').pop() || 'Image';
 
-		const blob = await fetch('/api/proxy', {
+		const response = await fetch('/api/proxy', {
 			headers: { 'X-Proxy-Url': url }
-		}).then((res) => res.blob());
+		});
+
+		if (!response.ok) {
+			throw new Error(`Error ${response.status} while fetching image: ${response.statusText}`);
+		}
+
+		const blob = await response.blob();
 
 		if (!supportedMimeTypes.includes(blob.type)) {
 			throw new Error(`URL returned ${blob.type} instead of an image`);
