@@ -1,6 +1,6 @@
 import { env, ImageSegmentationPipeline, pipeline, RawImage } from '@huggingface/transformers';
 import { error } from '@sveltejs/kit';
-import path from 'path';
+import path from 'node:path';
 
 export const POST = async ({ request }) => {
 	const form = await request.formData();
@@ -24,13 +24,13 @@ async function removeBackground(image: RawImage) {
 		image.rgba().grayscale();
 	} else {
 		const imagePipeline = await getPipeline();
-		const mask = await imagePipeline(image).then((res) => res[0].mask);
-		image.rgba().putAlpha(mask);
+		const output = await imagePipeline(image);
+		image.rgba().putAlpha(output[0].mask);
 	}
 }
 
 env.cacheDir = path.join(process.cwd(), '.model_cache');
-let imagePipeline: ImageSegmentationPipeline | null = null;
+let imagePipeline: ImageSegmentationPipeline | undefined;
 
 async function getPipeline() {
 	if (!imagePipeline) {

@@ -24,10 +24,9 @@
 		ev.dataTransfer!.dropEffect = images.length ? 'copy' : 'none';
 	}}
 	ondragover={(ev) => {
-		if ([...ev.dataTransfer!.items].some((i) => i.kind === 'file')) {
-			ev.preventDefault();
-			hovering = true;
-		}
+		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
+		ev.preventDefault();
+		hovering = true;
 	}}
 	ondragend={() => (hovering = false)}
 />
