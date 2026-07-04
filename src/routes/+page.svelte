@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Entry } from '$lib/entry.svelte';
-	import AddImages from './partials/AddImages.svelte';
-	import Header from './partials/Header.svelte';
-	import ListImages from './partials/ListImages.svelte';
+	import AddImages from './_partials/AddImages.svelte';
+	import Header from './_partials/Header.svelte';
+	import ListImages from './_partials/ListImages.svelte';
 
 	let entries = $state<Entry[]>([]);
 </script>
