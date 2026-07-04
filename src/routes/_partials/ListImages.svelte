@@ -17,9 +17,7 @@
 	{#if entries.length}
 		<header>
 			<h2>Images</h2>
-			{#if entries.length}
-				<Button kind="subtle" onclick={() => (entries = [])}>Clear all</Button>
-			{/if}
+			<Button kind="subtle" onclick={() => (entries = [])}>Clear all</Button>
 		</header>
 	{:else}
 		<div class="placeholder">
