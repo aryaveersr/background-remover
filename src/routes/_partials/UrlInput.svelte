@@ -14,6 +14,8 @@
 
 <form
 	onsubmit={async (ev) => {
+		ev.preventDefault();
+
 		const form = ev.currentTarget;
 		const url = new FormData(form).get('url') as string;
 
