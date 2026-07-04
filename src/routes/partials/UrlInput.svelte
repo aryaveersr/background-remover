@@ -9,35 +9,30 @@
 	}
 
 	let { entries = $bindable() }: Props = $props();
-	let urlInput = $state('');
-
-	async function onUrlInput() {
-		const entry = await Entry.fromUrl(urlInput);
-		entries.push(entry);
-		urlInput = '';
-	}
 </script>
 
-<label for="url-input">Add image from URL</label>
-<div class="url">
-	<Input
-		bind:value={urlInput}
-		id="url-input"
-		placeholder="Paste URL here.."
-		style="width: 100%"
-		onkeydown={(ev) => {
-			if (ev.key != 'Enter') return;
-			ev.preventDefault();
-			onUrlInput();
-		}}
-	/>
-	<Button type="button" size="md" kind="subtle" onclick={onUrlInput}>
-		<Plus />
-	</Button>
-</div>
+<form
+	onsubmit={async (ev) => {
+		const form = ev.currentTarget;
+		const url = new FormData(form).get('url') as string;
+
+		const entry = await Entry.fromUrl(url);
+		entries.push(entry);
+
+		form.reset();
+	}}
+>
+	<label for="url-input">Add image from URL</label>
+	<div>
+		<Input name="url" id="url-input" placeholder="Paste URL here.." style="width: 100%" />
+		<Button size="md" kind="subtle">
+			<Plus />
+		</Button>
+	</div>
+</form>
 
 <style>
-	.url {
+	div {
 		/* Layout */
 		display: flex;
 

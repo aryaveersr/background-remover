@@ -22,12 +22,7 @@
 	}}
 />
 
-<form
-	onsubmit={(ev) => {
-		ev.preventDefault();
-		entries.forEach((entry) => entry.upload());
-	}}
->
+<div class="container">
 	<div class="top">
 		<h2>Upload images</h2>
 		<FileUpload onupload={(file) => entries.push(new Entry(file))} />
@@ -39,14 +34,19 @@
 		<p>Or paste images directly from your clipboard.</p>
 	</div>
 	<div>
-		<Button type="submit" size="md" style="width: 100%" disabled={entries.length === 0}>
+		<Button
+			size="md"
+			style="width: 100%"
+			disabled={entries.length === 0}
+			onclick={() => entries.forEach((entry) => entry.upload())}
+		>
 			Remove Background
 		</Button>
 	</div>
-</form>
+</div>
 
 <style>
-	form {
+	.container {
 		/* Appearance */
 		background-color: white;
 		border-bottom: 1px solid var(--neutral-200);
@@ -87,7 +87,7 @@
 	}
 
 	@media (min-width: 900px) {
-		form {
+		.container {
 			/* Take all space*/
 			height: 100%;
 
