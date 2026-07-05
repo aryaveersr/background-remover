@@ -1,20 +1,22 @@
 <script lang="ts">
-	import { extensions, mimeTypes } from '$lib/utils/mime';
+	import type { Merge } from '$lib/utils/merge';
 	import { Upload } from '@lucide/svelte';
+	import type { Snippet } from 'svelte';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	interface Props {
 		onupload?: (file: File) => void;
+		children?: Snippet;
 	}
 
-	let { onupload = () => {} }: Props = $props();
+	let { onupload = () => {}, children, ...props }: Merge<Props, HTMLInputAttributes> = $props();
 </script>
 
 <label>
 	<input
 		type="file"
 		class="visually-hidden"
-		accept={mimeTypes.join(', ')}
-		multiple
+		{...props}
 		onchange={(ev) => {
 			[...ev.currentTarget.files!].forEach(onupload);
 			ev.currentTarget.value = '';
@@ -24,8 +26,8 @@
 		<span>
 			<Upload />
 		</span>
-		<p>Click or drag and drop images here...</p>
-		<small>{extensions} supported</small>
+		<p>Click or drag and drop files here...</p>
+		<small>{@render children?.()}</small>
 	</div>
 </label>
 

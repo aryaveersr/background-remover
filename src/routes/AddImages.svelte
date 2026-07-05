@@ -2,6 +2,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
 	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { extensions, mimeTypes } from '$lib/utils/mime';
 	import UrlInput from './UrlInput.svelte';
 
 	let entries = getEntries();
@@ -10,7 +11,13 @@
 <div class="container">
 	<div class="top">
 		<h2>Upload images</h2>
-		<FileUpload onupload={(file) => entries.add(new Entry(file))} />
+		<FileUpload
+			onupload={(file) => entries.add(new Entry(file))}
+			accept={mimeTypes.join(', ')}
+			multiple
+		>
+			{extensions} supported
+		</FileUpload>
 
 		<hr />
 		<UrlInput />
