@@ -6,7 +6,8 @@ export const GET: RequestHandler = async ({ request }) => {
 	if (!url) throw error(400, 'No url specified');
 
 	try {
-		return fetch(url);
+		const res = await fetch(url);
+		return res;
 	} catch {
 		throw error(500, 'Failed to fetch url');
 	}
