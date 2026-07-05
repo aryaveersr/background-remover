@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
-	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { getEntries } from '$lib/entries.svelte';
+	import { createEntry } from '$lib/entry';
 	import { extensions, mimeTypes } from '$lib/utils/mime';
 	import UrlInput from './UrlInput.svelte';
 
@@ -11,8 +12,9 @@
 <div class="container">
 	<div class="top">
 		<h2>Upload images</h2>
+
 		<FileUpload
-			onupload={(file) => entries.add(new Entry(file))}
+			onupload={(file) => entries.add(createEntry(file))}
 			accept={mimeTypes.join(', ')}
 			multiple
 		>

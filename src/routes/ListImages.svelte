@@ -3,9 +3,12 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import Progress from '$lib/components/Progress.svelte';
 	import { getEntries } from '$lib/entries.svelte';
+	import { downloadEntry } from '$lib/entry';
 	import { ArrowDownToLine, Images, Trash2 } from '@lucide/svelte';
 
 	let entries = getEntries();
+	let unprocessed = $derived(entries.all.filter((entry) => entry.kind != 'processed'));
+	let processed = $derived(entries.all.filter((entry) => entry.kind == 'processed'));
 </script>
 
 <div class="container">
@@ -24,14 +27,14 @@
 			<Button kind="subtle" onclick={() => entries.clearAll()}>Clear all</Button>
 		</header>
 	{/if}
-	{#if entries.notProcessed.length}
+	{#if unprocessed.length}
 		<section>
 			<header>
 				<h3>Unprocessed</h3>
-				<Button kind="ghost" onclick={() => entries.clearUnprocessed()}>Clear</Button>
+				<Button kind="ghost" onclick={() => entries.clearBase()}>Clear</Button>
 			</header>
 			<ul aria-label="Unprocessed images">
-				{#each entries.notProcessed as entry (entry.id)}
+				{#each unprocessed as entry (entry.id)}
 					<li>
 						<figure>
 							<img src={entry.src} aria-labelledby="filename-{entry.id}" alt={entry.file.name} />
@@ -49,15 +52,15 @@
 						</figure>
 						<Progress
 							aria-label="Upload progress"
-							aria-hidden={entry.isUnprocessed()}
-							value={entry.isProcessing() ? entry.state.progress : 0}
+							aria-hidden={entry.kind == 'base'}
+							value={entry.kind == 'processing' ? entry.progress : 0}
 						/>
 					</li>
 				{/each}
 			</ul>
 		</section>
 	{/if}
-	{#if entries.processed.length}
+	{#if processed.length}
 		<section>
 			<header>
 				<h3>Processed</h3>
@@ -67,19 +70,15 @@
 				</div>
 			</header>
 			<ul aria-label="Processed images">
-				{#each entries.processed as entry (entry.id)}
+				{#each processed as entry (entry.id)}
 					<li>
 						<figure>
-							<img
-								src={entry.state.out}
-								aria-labelledby="filename-{entry.id}"
-								alt={entry.file.name}
-							/>
+							<img src={entry.out} aria-labelledby="filename-{entry.id}" alt={entry.file.name} />
 							<figcaption>
 								<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
 								<Button
 									kind="ghost"
-									onclick={() => entry.download()}
+									onclick={() => downloadEntry(entry)}
 									aria-label="Download"
 									title="Download"
 								>

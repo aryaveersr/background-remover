@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { getEntries } from '$lib/entries.svelte';
+	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';
 	import { Plus } from '@lucide/svelte';
 
@@ -35,8 +36,7 @@
 
 		try {
 			const file = await fetchUrl(url);
-
-			entries.add(new Entry(file));
+			entries.add(createEntry(file));
 			form.reset();
 			err = '';
 		} catch (e) {

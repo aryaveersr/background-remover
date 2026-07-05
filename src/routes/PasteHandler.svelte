@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { getEntries } from '$lib/entries.svelte';
+	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';
 
 	let entries = getEntries();
@@ -11,7 +12,7 @@
 			if (item.kind != 'file') continue;
 			if (!mimeTypes.includes(item.type)) continue;
 
-			entries.add(new Entry(item.getAsFile()!));
+			entries.add(createEntry(item.getAsFile()!));
 		}
 	}}
 />

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
-	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { getEntries } from '$lib/entries.svelte';
+	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';
 	import { Plus } from '@lucide/svelte';
 
@@ -31,7 +32,7 @@
 			.filter((item) => item.kind === 'file')
 			.filter((item) => mimeTypes.includes(item.type));
 
-		images.forEach((item) => entries.add(new Entry(item.getAsFile()!)));
+		images.forEach((item) => entries.add(createEntry(item.getAsFile()!)));
 	}}
 />
 
