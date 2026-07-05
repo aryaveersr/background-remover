@@ -34,9 +34,9 @@
 				{#each entries.notProcessed as entry (entry.id)}
 					<li>
 						<figure>
-							<img src={entry.src} alt="" />
+							<img src={entry.src} aria-labelledby="filename-{entry.id}" alt={entry.file.name} />
 							<figcaption>
-								<p title={entry.file.name}>{entry.file.name}</p>
+								<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
 								<Button
 									kind="ghost"
 									onclick={() => entries.remove(entry)}
@@ -70,9 +70,13 @@
 				{#each entries.processed as entry (entry.id)}
 					<li>
 						<figure>
-							<img src={entry.state.out} alt="" />
+							<img
+								src={entry.state.out}
+								aria-labelledby="filename-{entry.id}"
+								alt={entry.file.name}
+							/>
 							<figcaption>
-								<p title={entry.file.name}>{entry.file.name}</p>
+								<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
 								<Button
 									kind="ghost"
 									onclick={() => entry.download()}
