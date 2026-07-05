@@ -37,7 +37,12 @@
 							<img src={entry.src} alt="" />
 							<figcaption>
 								<p title={entry.file.name}>{entry.file.name}</p>
-								<Button kind="ghost" onclick={() => entries.remove(entry)}>
+								<Button
+									kind="ghost"
+									onclick={() => entries.remove(entry)}
+									aria-label="Remove"
+									title="Remove"
+								>
 									<Trash2 />
 								</Button>
 							</figcaption>
@@ -68,7 +73,12 @@
 							<img src={entry.state.out} alt="" />
 							<figcaption>
 								<p title={entry.file.name}>{entry.file.name}</p>
-								<Button kind="ghost" onclick={() => entry.download()}>
+								<Button
+									kind="ghost"
+									onclick={() => entry.download()}
+									aria-label="Download"
+									title="Download"
+								>
 									<ArrowDownToLine />
 								</Button>
 							</figcaption>

@@ -58,7 +58,7 @@
 			aria-describedby={err.length ? 'url-err' : undefined}
 			aria-invalid={err.length ? true : undefined}
 		/>
-		<Button size="md" kind="subtle">
+		<Button size="md" kind="subtle" aria-label="Add" title="Add">
 			<Plus />
 		</Button>
 	</div>
