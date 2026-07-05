@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Merge } from '$lib';
+	import type { Merge } from '$lib/utils/merge';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	interface Props {

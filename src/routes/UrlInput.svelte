@@ -1,27 +1,42 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import { Entry } from '$lib/entry.svelte';
+	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { mimeTypes } from '$lib/utils/mime';
 	import { Plus } from '@lucide/svelte';
 
-	interface Props {
-		entries: Entry[];
-	}
-
-	let { entries = $bindable() }: Props = $props();
+	let entries = getEntries();
 	let err = $state('');
+
+	async function fetchUrl(url: string) {
+		const filename = new URL(url).pathname.split('/').pop() || 'Image';
+		const res = await fetch('/api/proxy', { headers: { 'X-Proxy-Url': url } });
+		const blob = await res.blob();
+
+		if (!res.ok) {
+			throw new Error(`Error ${res.status} while fetching image: ${res.statusText}`);
+		}
+
+		if (!mimeTypes.includes(blob.type)) {
+			throw new Error(`URL returned ${blob.type} instead of an image`);
+		}
+
+		return new File([blob], filename, {
+			type: blob.type
+		});
+	}
 </script>
 
 <form
 	onsubmit={async (ev) => {
 		ev.preventDefault();
-
 		const form = ev.currentTarget;
 		const url = new FormData(form).get('url') as string;
 
 		try {
-			const entry = await Entry.fromUrl(url);
-			entries.push(entry);
+			const file = await fetchUrl(url);
+
+			entries.add(new Entry(file));
 			form.reset();
 			err = '';
 		} catch (e) {

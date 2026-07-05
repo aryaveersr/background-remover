@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Merge } from '$lib';
+	import type { Merge } from '$lib/utils/merge';
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 

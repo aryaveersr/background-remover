@@ -1,20 +1,17 @@
 <script lang="ts">
-	import { supportedMimeTypes } from '$lib';
-	import { Entry } from '$lib/entry.svelte';
+	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { mimeTypes } from '$lib/utils/mime';
 
-	interface Props {
-		entries: Entry[];
-	}
-
-	let { entries = $bindable() }: Props = $props();
+	let entries = getEntries();
 </script>
 
 <svelte:window
 	onpaste={(ev) => {
 		for (const item of ev.clipboardData!.items) {
 			if (item.kind != 'file') continue;
-			if (!supportedMimeTypes.includes(item.type)) continue;
-			entries.push(new Entry(item.getAsFile()!));
+			if (!mimeTypes.includes(item.type)) continue;
+
+			entries.add(new Entry(item.getAsFile()!));
 		}
 	}}
 />

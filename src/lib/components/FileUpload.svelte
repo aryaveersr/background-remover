@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { supportedExtensions, supportedMimeTypes } from '$lib';
+	import { extensions, mimeTypes } from '$lib/utils/mime';
 	import { Upload } from '@lucide/svelte';
 
 	interface Props {
@@ -13,7 +13,7 @@
 	<input
 		type="file"
 		class="visually-hidden"
-		accept={supportedMimeTypes.join(', ')}
+		accept={mimeTypes.join(', ')}
 		multiple
 		onchange={(ev) => {
 			[...ev.currentTarget.files!].forEach(onupload);
@@ -25,7 +25,7 @@
 			<Upload />
 		</span>
 		<p>Click or drag and drop images here...</p>
-		<small>{supportedExtensions} supported</small>
+		<small>{extensions} supported</small>
 	</div>
 </label>
 

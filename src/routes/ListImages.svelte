@@ -1,25 +1,14 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import Progress from '$lib/components/Progress.svelte';
-	import type { Entry } from '$lib/entry.svelte';
+	import { getEntries } from '$lib/entries.svelte';
 	import { ArrowDownToLine, Images, Trash2 } from '@lucide/svelte';
 
-	interface Props {
-		entries: Entry[];
-	}
-
-	let { entries = $bindable() }: Props = $props();
-	let unprocessed = $derived(entries.filter((entry) => entry.status != 'processed'));
-	let processed = $derived(entries.filter((entry) => entry.status == 'processed'));
+	let entries = getEntries();
 </script>
 
 <div class="container">
-	{#if entries.length}
-		<header>
-			<h2>Images</h2>
-			<Button kind="subtle" onclick={() => (entries = [])}>Clear all</Button>
-		</header>
-	{:else}
+	{#if entries.isEmpty()}
 		<div class="placeholder">
 			<div>
 				<span>
@@ -28,54 +17,54 @@
 				<p>Upload images to get started.</p>
 			</div>
 		</div>
+	{:else}
+		<header>
+			<h2>Images</h2>
+			<Button kind="subtle" onclick={() => entries.clearAll()}>Clear all</Button>
+		</header>
 	{/if}
-	{#if unprocessed.length}
+	{#if entries.notProcessed.length}
 		<section>
 			<header>
 				<h3>Unprocessed</h3>
-				<Button kind="ghost" onclick={() => (entries = processed)}>Clear</Button>
+				<Button kind="ghost" onclick={() => entries.clearUnprocessed()}>Clear</Button>
 			</header>
 			<ul aria-label="Unprocessed images">
-				{#each unprocessed as entry (entry.id)}
+				{#each entries.notProcessed as entry (entry.id)}
 					<li>
 						<figure>
-							<img src={entry.srcIn} alt="" />
+							<img src={entry.src} alt="" />
 							<figcaption>
 								<p title={entry.file.name}>{entry.file.name}</p>
-								<Button
-									kind="ghost"
-									onclick={() => (entries = entries.filter((f) => f.id !== entry.id))}
-								>
+								<Button kind="ghost" onclick={() => entries.remove(entry)}>
 									<Trash2 />
 								</Button>
 							</figcaption>
 						</figure>
 						<Progress
 							aria-label="Upload progress"
-							aria-hidden={entry.status == 'unprocessed'}
-							value={entry.progress}
+							aria-hidden={entry.isUnprocessed()}
+							value={entry.isProcessing() ? entry.state.progress : 0}
 						/>
 					</li>
 				{/each}
 			</ul>
 		</section>
 	{/if}
-	{#if processed.length}
+	{#if entries.processed.length}
 		<section>
 			<header>
 				<h3>Processed</h3>
 				<div>
-					<Button kind="ghost" onclick={() => (entries = unprocessed)}>Clear</Button>
-					<Button kind="filled" onclick={() => processed.forEach((entry) => entry.download())}>
-						Download all
-					</Button>
+					<Button kind="ghost" onclick={() => entries.clearProcessed()}>Clear</Button>
+					<Button kind="filled" onclick={() => entries.downloadAll()}>Download all</Button>
 				</div>
 			</header>
 			<ul aria-label="Processed images">
-				{#each processed as entry (entry.id)}
+				{#each entries.processed as entry (entry.id)}
 					<li>
 						<figure>
-							<img src={entry.srcOut} alt="" />
+							<img src={entry.state.out} alt="" />
 							<figcaption>
 								<p title={entry.file.name}>{entry.file.name}</p>
 								<Button kind="ghost" onclick={() => entry.download()}>

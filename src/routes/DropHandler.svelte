@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { supportedMimeTypes } from '$lib';
-	import { Entry } from '$lib/entry.svelte';
+	import { Entry, getEntries } from '$lib/entries.svelte';
+	import { mimeTypes } from '$lib/utils/mime';
 	import { Plus } from '@lucide/svelte';
 
-	interface Props {
-		entries: Entry[];
-	}
-
-	let { entries = $bindable() }: Props = $props();
+	let entries = getEntries();
 	let hovering = $state(false);
 </script>
 
@@ -18,9 +14,9 @@
 
 		const images = [...ev.dataTransfer!.items]
 			.filter((item) => item.kind === 'file')
-			.filter((item) => supportedMimeTypes.includes(item.type));
+			.filter((item) => mimeTypes.includes(item.type));
 
-		images.forEach((item) => entries.push(new Entry(item.getAsFile()!)));
+		images.forEach((item) => entries.add(new Entry(item.getAsFile()!)));
 		ev.dataTransfer!.dropEffect = images.length ? 'copy' : 'none';
 	}}
 	ondragover={(ev) => {

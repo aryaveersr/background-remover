@@ -1,23 +1,19 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import FileUpload from '$lib/components/FileUpload.svelte';
-	import { Entry } from '$lib/entry.svelte';
+	import { Entry, getEntries } from '$lib/entries.svelte';
 	import UrlInput from './UrlInput.svelte';
 
-	interface Props {
-		entries: Entry[];
-	}
-
-	let { entries = $bindable() }: Props = $props();
+	let entries = getEntries();
 </script>
 
 <div class="container">
 	<div class="top">
 		<h2>Upload images</h2>
-		<FileUpload onupload={(file) => entries.push(new Entry(file))} />
+		<FileUpload onupload={(file) => entries.add(new Entry(file))} />
 
 		<hr />
-		<UrlInput bind:entries />
+		<UrlInput />
 		<hr />
 
 		<p>Or paste images directly from your clipboard.</p>
@@ -25,8 +21,8 @@
 	<Button
 		size="md"
 		style="width: 100%"
-		disabled={entries.length === 0}
-		onclick={() => entries.forEach((entry) => entry.upload())}
+		disabled={entries.isEmpty()}
+		onclick={() => entries.upload()}
 	>
 		Remove Background
 	</Button>
