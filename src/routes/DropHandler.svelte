@@ -6,26 +6,33 @@
 
 	let entries = getEntries();
 	let hovering = $state(false);
+	let counter = 0;
 </script>
 
 <svelte:window
+	ondragenter={() => {
+		counter++;
+		hovering = true;
+	}}
+	ondragleave={() => {
+		counter--;
+		if (counter == 0) hovering = false;
+	}}
+	ondragover={(ev) => {
+		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
+		ev.preventDefault();
+	}}
 	ondrop={(ev) => {
 		ev.preventDefault();
 		hovering = false;
+		counter = 0;
 
 		const images = [...ev.dataTransfer!.items]
 			.filter((item) => item.kind === 'file')
 			.filter((item) => mimeTypes.includes(item.type));
 
 		images.forEach((item) => entries.add(new Entry(item.getAsFile()!)));
-		ev.dataTransfer!.dropEffect = images.length ? 'copy' : 'none';
 	}}
-	ondragover={(ev) => {
-		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
-		ev.preventDefault();
-		hovering = true;
-	}}
-	ondragend={() => (hovering = false)}
 />
 
 {#if hovering}
