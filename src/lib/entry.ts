@@ -28,13 +28,6 @@ export function createEntry(file: File): BaseEntry {
 	};
 }
 
-export function downloadEntry(entry: ProcessedEntry) {
-	const a = document.createElement('a');
-	a.download = `${entry.file.name.split('.').slice(0, -1).join('.')}-no-bg.png`;
-	a.href = entry.out;
-	a.click();
-}
-
 export function destroyEntry(entry: Entry) {
 	URL.revokeObjectURL(entry.src);
 	if (entry.kind == 'processed') {
@@ -42,9 +35,8 @@ export function destroyEntry(entry: Entry) {
 	}
 }
 
-export function uploadEntry(entry: Entry) {
-	if ((entry as BaseEntry).kind != 'base') return;
-
+export function uploadEntry(baseEntry: BaseEntry) {
+	const entry = baseEntry as Entry;
 	const xhr = new XMLHttpRequest();
 	const form = new FormData();
 
@@ -67,4 +59,11 @@ export function uploadEntry(entry: Entry) {
 	xhr.responseType = 'blob';
 	xhr.open('POST', '/api/process');
 	xhr.send(form);
+}
+
+export function downloadEntry(entry: ProcessedEntry) {
+	const a = document.createElement('a');
+	a.download = `${entry.file.name.split('.').slice(0, -1).join('.')}-no-bg.png`;
+	a.href = entry.out;
+	a.click();
 }
