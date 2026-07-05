@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
 	import { Entry, getEntries } from '$lib/entries.svelte';
 	import { mimeTypes } from '$lib/utils/mime';
 	import { Plus } from '@lucide/svelte';
@@ -30,9 +31,9 @@
 {#if hovering}
 	<section>
 		<div>
-			<span>
+			<Icon>
 				<Plus />
-			</span>
+			</Icon>
 			<p>Drop the file anywhere to import.</p>
 		</div>
 	</section>
@@ -71,23 +72,5 @@
 
 		/* Spacing */
 		gap: 1.25rem;
-	}
-
-	span {
-		/* Size */
-		aspect-ratio: 1;
-		font-size: 1.25rem;
-
-		/* Appearance */
-		background-color: var(--neutral-100);
-		border-radius: 100%;
-
-		/* Layout */
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		/* Spacing */
-		padding: 1rem;
 	}
 </style>
