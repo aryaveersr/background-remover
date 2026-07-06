@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import { Eraser } from '@lucide/svelte';
 </script>
 
@@ -8,6 +9,7 @@
 		<nav>
 			<a href="https://github.com/aryaveersr/background-remover">Github</a>
 		</nav>
+		<ThemeToggle />
 	</div>
 </header>
 
@@ -27,6 +29,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+	}
+
+	div {
+		/* Layout */
+		display: flex;
+		align-items: center;
+
+		/* Spacing */
+		gap: 1rem;
 	}
 
 	a {
