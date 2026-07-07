@@ -113,7 +113,7 @@
 		}
 
 		&:focus-visible {
-			outline: 2px solid var(--neutral-600);
+			outline: 2px solid var(--border-emphasized);
 			outline-offset: 1px;
 		}
 	}
