@@ -31,7 +31,7 @@
 		size="md"
 		color="primary"
 		style="width: 100%"
-		disabled={entries.isEmpty()}
+		disabled={entries.all.every((entry) => entry.kind != 'base')}
 		onclick={() => entries.upload()}
 	>
 		Remove Background
