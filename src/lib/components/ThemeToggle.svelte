@@ -6,13 +6,7 @@
 	let theme = $state('dark');
 
 	onMount(() => {
-		const saved = localStorage?.getItem('theme');
-		const preference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-		if (saved && ['light', 'dark'].includes(saved)) theme = saved;
-		else theme = preference;
-
-		if (theme == 'dark') document.documentElement.classList.add('dark');
+		theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 	});
 
 	function toggleTheme() {
@@ -23,6 +17,20 @@
 		else document.documentElement.classList.remove('dark');
 	}
 </script>
+
+<svelte:head>
+	<script>
+		const saved = localStorage?.getItem('theme');
+		const preference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+		let theme;
+
+		if (saved && ['light', 'dark'].includes(saved)) theme = saved;
+		else theme = preference;
+
+		if (theme == 'dark') document.documentElement.classList.add('dark');
+	</script>
+</svelte:head>
 
 <Button
 	kind="ghost"
