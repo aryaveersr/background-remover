@@ -66,7 +66,7 @@
 				<h3>Processed</h3>
 				<div>
 					<Button kind="ghost" onclick={() => entries.clearProcessed()}>Clear</Button>
-					<Button kind="filled" onclick={() => entries.downloadAll()}>Download all</Button>
+					<Button color="primary" onclick={() => entries.downloadAll()}>Download all</Button>
 				</div>
 			</header>
 			<ul aria-label="Processed images">
@@ -102,7 +102,7 @@
 		z-index: 49;
 
 		/* Appearance */
-		background-color: white;
+		background-color: var(--bg-surface);
 
 		/* Spacing */
 		padding: 1rem;
@@ -111,6 +111,9 @@
 	section {
 		/* Spacing */
 		padding: 1rem;
+
+		/* Appearance */
+		background-color: transparent;
 	}
 
 	header {
@@ -120,7 +123,7 @@
 		justify-content: space-between;
 
 		/* Appearance */
-		border-bottom: 1px solid var(--neutral-200);
+		border-bottom: 1px solid var(--border-muted);
 
 		/* Spacing */
 		padding-block: 0.25rem;
@@ -142,7 +145,7 @@
 
 	h3 {
 		/* Font */
-		font-size: var(--text-normal);
+		font-size: var(--text-default);
 		font-weight: 400;
 	}
 
@@ -171,7 +174,7 @@
 		align-items: center;
 
 		/* Appearance */
-		background-color: white;
+		background-color: var(--bg-surface);
 
 		/* Spacing */
 		gap: 1.25rem;
@@ -192,7 +195,7 @@
 
 	li {
 		/* Appearance */
-		background-color: white;
+		background-color: var(--bg-surface);
 	}
 
 	figcaption {

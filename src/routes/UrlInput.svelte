@@ -94,6 +94,6 @@
 
 	span {
 		/* Appearance */
-		color: var(--red-600);
+		color: var(--fg-error);
 	}
 </style>

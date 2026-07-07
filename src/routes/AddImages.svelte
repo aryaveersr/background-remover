@@ -29,6 +29,7 @@
 	</div>
 	<Button
 		size="md"
+		color="primary"
 		style="width: 100%"
 		disabled={entries.isEmpty()}
 		onclick={() => entries.upload()}
@@ -40,8 +41,8 @@
 <style>
 	.container {
 		/* Appearance */
-		background-color: white;
-		border-bottom: 1px solid var(--neutral-200);
+		background-color: var(--bg-surface);
+		border-bottom: 1px solid var(--border-muted);
 
 		/* Layout */
 		display: flex;
@@ -65,7 +66,7 @@
 	hr {
 		/* Appearance */
 		border: none;
-		border-top: 2px dotted var(--neutral-300);
+		border-top: 2px dotted var(--border);
 
 		/* Spacing */
 		margin: 1rem;
@@ -84,7 +85,7 @@
 			height: 100%;
 
 			border-bottom: none;
-			border-right: 1px solid var(--neutral-200);
+			border-right: 1px solid var(--border-muted);
 		}
 	}
 </style>

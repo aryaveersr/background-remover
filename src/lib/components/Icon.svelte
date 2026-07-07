@@ -19,7 +19,7 @@
 		font-size: 1.25rem;
 
 		/* Appearance */
-		background-color: var(--neutral-100);
+		background-color: var(--bg-muted);
 		border-radius: 100%;
 
 		/* Layout */

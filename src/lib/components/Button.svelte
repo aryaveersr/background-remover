@@ -6,8 +6,8 @@
 	interface Props {
 		children?: Snippet;
 		size?: 'sm' | 'md';
-		kind?: 'filled' | 'subtle' | 'ghost';
-		color?: 'neutral';
+		kind?: 'filled' | 'outline' | 'subtle' | 'ghost';
+		color?: 'primary' | 'neutral';
 	}
 
 	let {
@@ -26,29 +26,39 @@
 <style>
 	/* Color and kind variants */
 
-	[data-color='neutral'] {
+	[data-color='primary'] {
 		&[data-kind='filled'] {
-			--btn-color: var(--neutral-50);
+			--btn-color: var(--primary-contrast);
 
-			--btn-bg: var(--neutral-800);
-			--btn-hover-bg: var(--neutral-700);
-			--btn-active-bg: var(--neutral-600);
+			--btn-bg: var(--primary-solid);
+			--btn-hover-bg: color-mix(in srgb, var(--primary-solid) 90%, transparent);
+			--btn-active-bg: color-mix(in srgb, var(--primary-solid) 80%, transparent);
 		}
 
 		&[data-kind='subtle'] {
 			--btn-color: var(--neutral-800);
 
-			--btn-bg: var(--neutral-100);
-			--btn-hover-bg: var(--neutral-200);
-			--btn-active-bg: var(--neutral-300);
+			--btn-bg: var(--primary-subtle);
+			--btn-hover-bg: var(--primary-muted);
+			--btn-active-bg: var(--primary-emphasized);
+		}
+	}
+
+	[data-color='neutral'] {
+		&[data-kind='subtle'] {
+			--btn-color: var(--fg-muted);
+
+			--btn-bg: var(--bg-subtle);
+			--btn-hover-bg: var(--bg-muted);
+			--btn-active-bg: var(--bg-emphasized);
 		}
 
 		&[data-kind='ghost'] {
-			--btn-color: var(--neutral-800);
+			--btn-color: var(--fg);
 
 			--btn-bg: transparent;
-			--btn-hover-bg: var(--neutral-200);
-			--btn-active-bg: var(--neutral-300);
+			--btn-hover-bg: var(--bg-muted);
+			--btn-active-bg: var(--bg-emphasized);
 		}
 	}
 

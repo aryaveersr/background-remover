@@ -1,39 +1,75 @@
 :root {
-	/* Fonts */
-	--font-sans-serif: 'Raleway Variable', sans-serif;
-
-	/* Colors */
-	--neutral-50: #f9fafb;
-	--neutral-100: #f3f4f6;
-	--neutral-200: #e5e7eb;
-	--neutral-300: #d1d5db;
-	--neutral-400: #9ca3af;
-	--neutral-500: #6b7280;
-	--neutral-600: #4b5563;
-	--neutral-700: #374151;
-	--neutral-800: #1f2937;
-	--neutral-900: #111827;
-	--neutral-950: #030712;
-
-	--red-50: #fef2f2;
-	--red-100: #fee2e2;
-	--red-200: #fecaca;
-	--red-300: #fca5a5;
-	--red-400: #f87171;
-	--red-500: #ef4444;
-	--red-600: #dc2626;
-	--red-700: #b91c1c;
-	--red-800: #991b1b;
-	--red-900: #7f1d1d;
-	--red-950: #450a0a;
-
 	/* Font sizes */
 	--text-xs: 0.75rem; /* 12px */
 	--text-sm: 0.875rem; /* 14px */
-	--text-normal: 1rem; /* 16px */
+	--text-default: 1rem; /* 16px */
 	--text-lg: 1.25rem; /* 20px */
 	--text-xl: 1.5rem; /* 24px */
 	--text-2xl: 1.875rem; /* 30px */
 	--text-3xl: 2.25rem; /* 36px */
 	--text-4xl: 3rem; /* 48px */
+
+	/* Theme */
+
+	/* Background */
+	--bg: var(--gray-50);
+	--bg-surface: white;
+	--bg-overlay: rgba(0, 0, 0, 0.5);
+
+	--bg-subtle: var(--gray-50);
+	--bg-muted: var(--gray-100);
+	--bg-emphasized: var(--gray-200);
+
+	/* Foreground */
+	--fg: var(--gray-800);
+	--fg-muted: var(--gray-700);
+	--fg-subtle: var(--gray-600);
+	--fg-light: var(--gray-500);
+	--fg-error: var(--red-700);
+
+	/* Border */
+	--border-muted: var(--gray-200);
+	--border: var(--gray-300);
+	--border-emphasized: var(--gray-600);
+	--border-error: var(--red-500);
+
+	/* Primary */
+	--primary-solid: var(--blue-600);
+	--primary-subtle: var(--blue-100);
+	--primary-muted: var(--blue-200);
+	--primary-emphasized: var(--blue-300);
+	--primary-contrast: white;
+
+	/* Danger */
+}
+
+.dark {
+	/* Background */
+	--bg: var(--gray-950);
+	--bg-surface: black;
+	--bg-overlay: rgba(255, 255, 255, 0.25);
+
+	--bg-subtle: var(--gray-950);
+	--bg-muted: var(--gray-900);
+	--bg-emphasized: var(--gray-800);
+
+	/* Foreground */
+	--fg: var(--gray-200);
+	--fg-muted: var(--gray-300);
+	--fg-subtle: var(--gray-400);
+	--fg-light: var(--gray-500);
+	--fg-error: var(--red-300);
+
+	/* Border */
+	--border-muted: var(--gray-800);
+	--border: var(--gray-700);
+	--border-emphasized: var(--gray-200);
+	--border-error: var(--red-400);
+
+	/* Primary */
+	--primary-solid: var(--blue-300);
+	--primary-subtle: var(--blue-900);
+	--primary-muted: var(--blue-800);
+	--primary-emphasized: var(--blue-700);
+	--primary-contrast: black;
 }

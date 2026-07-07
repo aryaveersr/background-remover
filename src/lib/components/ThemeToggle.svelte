@@ -12,15 +12,15 @@
 		if (saved && ['light', 'dark'].includes(saved)) theme = saved;
 		else theme = preference;
 
-		if (theme == 'dark') document.body.classList.add('dark');
+		if (theme == 'dark') document.documentElement.classList.add('dark');
 	});
 
 	function toggleTheme() {
 		theme = theme == 'light' ? 'dark' : 'light';
 		localStorage.setItem('theme', theme);
 
-		if (theme == 'dark') document.body.classList.add('dark');
-		else document.body.classList.remove('dark');
+		if (theme == 'dark') document.documentElement.classList.add('dark');
+		else document.documentElement.classList.remove('dark');
 	}
 </script>
 

@@ -56,7 +56,7 @@
 		height: 100%;
 
 		/* Appearance */
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: var(--bg-overlay);
 
 		/* Layout */
 		display: grid;
@@ -75,7 +75,7 @@
 		align-items: center;
 
 		/* Appearance */
-		background-color: white;
+		background-color: var(--bg-surface);
 		opacity: 1;
 
 		/* Spacing */

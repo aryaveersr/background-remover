@@ -19,8 +19,8 @@
 		grid-column: 1 / -1;
 
 		/* Appearance */
-		background-color: white;
-		border-bottom: 1px solid var(--neutral-200);
+		background-color: var(--bg-surface);
+		border-bottom: 1px solid var(--border-muted);
 
 		/* Spacing */
 		padding: 1rem 1.5rem;
@@ -42,7 +42,7 @@
 
 	a {
 		/* Appearance */
-		color: var(--neutral-700);
+		color: var(--fg-muted);
 		text-decoration: none;
 
 		/* Spacing */
@@ -52,11 +52,11 @@
 		transition: background-color 0.2s ease-in-out;
 
 		&:hover {
-			background-color: var(--neutral-100);
+			background-color: var(--bg-subtle);
 		}
 
 		&:focus-visible {
-			outline: 2px solid var(--neutral-600);
+			outline: 2px solid var(--border-emphasized);
 			outline-offset: 1px;
 		}
 	}

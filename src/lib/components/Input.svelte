@@ -19,9 +19,9 @@
 	input {
 		/* Appearance */
 		border: 2px solid transparent;
-		border-bottom: 2px solid var(--neutral-200);
-		color: var(--neutral-800);
-		background-color: var(--neutral-50);
+		border-bottom: 2px solid var(--border-muted);
+		color: var(--fg);
+		background-color: var(--bg-subtle);
 
 		/* Font */
 		font-size: var(--text-md);
@@ -43,11 +43,11 @@
 
 		&:hover,
 		&:focus {
-			background-color: var(--neutral-100);
+			background-color: var(--bg-muted);
 		}
 
 		&:active {
-			background-color: var(--neutral-200);
+			background-color: var(--bg-emphasized);
 		}
 
 		&:disabled {
@@ -57,11 +57,11 @@
 
 		&:focus-visible {
 			outline: none;
-			border-color: var(--neutral-600);
+			border-color: var(--border-emphasized);
 		}
 
 		&:user-invalid {
-			border-color: var(--red-600);
+			border-color: var(--border-error);
 		}
 	}
 </style>

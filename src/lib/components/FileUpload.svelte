@@ -38,8 +38,8 @@
 		height: 16rem;
 
 		/* Appearance */
-		border-bottom: 3px solid var(--neutral-200);
-		background-color: var(--neutral-50);
+		border-bottom: 3px solid var(--border-muted);
+		background-color: var(--bg-subtle);
 
 		/* Layout */
 		display: flex;
@@ -60,18 +60,18 @@
 
 	input:focus + div,
 	div:hover {
-		background-color: var(--neutral-100);
-		border-color: var(--neutral-300);
+		background-color: var(--bg-muted);
+		border-color: var(--border);
 	}
 
 	input:focus-visible + div {
-		outline: 2px solid var(--neutral-600);
+		outline: 2px solid var(--border-emphasized);
 		outline-offset: 2px;
 	}
 
 	span {
 		/* Appearance */
-		color: var(--neutral-600);
+		color: var(--fg-subtle);
 
 		/* Spacing */
 		margin-bottom: 0.5rem;
@@ -79,7 +79,7 @@
 
 	small {
 		/* Appearance */
-		color: var(--neutral-500);
+		color: var(--fg-light);
 
 		/* Font */
 		font-size: var(--text-sm);
