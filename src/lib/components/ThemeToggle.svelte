@@ -24,7 +24,7 @@
 	}
 </script>
 
-<Button kind="ghost" onclick={toggleTheme}>
+<Button kind="ghost" size="md" onclick={toggleTheme}>
 	{#if theme == 'light'}
 		<Sun />
 	{:else}

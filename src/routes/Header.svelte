@@ -23,7 +23,7 @@
 		border-bottom: 1px solid var(--border-muted);
 
 		/* Spacing */
-		padding: 1rem 1.5rem;
+		padding: 0.5rem 1.25rem;
 
 		/* Layout */
 		display: flex;
