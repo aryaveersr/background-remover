@@ -196,6 +196,7 @@
 	li {
 		/* Appearance */
 		background-color: var(--bg-surface);
+		border: 1px solid var(--border-muted);
 	}
 
 	figcaption {

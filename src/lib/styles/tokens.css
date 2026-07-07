@@ -45,7 +45,7 @@
 
 .dark {
 	/* Background */
-	--bg: var(--gray-950);
+	--bg: var(--gray-900);
 	--bg-surface: black;
 	--bg-overlay: rgba(255, 255, 255, 0.25);
 
