@@ -22,6 +22,7 @@
 		border-bottom: 2px solid var(--border-muted);
 		color: var(--fg);
 		background-color: var(--bg-subtle);
+		border-radius: var(--radius-md);
 
 		/* Font */
 		font-size: var(--text-md);

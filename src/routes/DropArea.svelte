@@ -78,7 +78,8 @@
 
 		/* Appearance */
 		background-color: var(--bg-surface);
-		opacity: 1;
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--border);
 
 		/* Spacing */
 		gap: 1.25rem;

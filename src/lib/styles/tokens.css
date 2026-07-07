@@ -9,6 +9,13 @@
 	--text-3xl: 2.25rem; /* 36px */
 	--text-4xl: 3rem; /* 48px */
 
+	/* Border radius */
+
+	--radius-sm: 0.25rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 1rem;
+	--radius-full: 100%;
+
 	/* Theme */
 
 	/* Background */

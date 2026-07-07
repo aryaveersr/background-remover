@@ -24,7 +24,12 @@
 	}
 </script>
 
-<Button kind="ghost" size="md" onclick={toggleTheme}>
+<Button
+	kind="ghost"
+	size="md"
+	onclick={toggleTheme}
+	style="border-radius: var(--radius-full); aspect-ratio: 1 / 1;"
+>
 	{#if theme == 'light'}
 		<Sun />
 	{:else}

@@ -40,6 +40,7 @@
 		/* Appearance */
 		border-bottom: 3px solid var(--border-muted);
 		background-color: var(--bg-subtle);
+		border-radius: var(--radius-md);
 
 		/* Layout */
 		display: flex;

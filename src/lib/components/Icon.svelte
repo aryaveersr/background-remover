@@ -20,7 +20,7 @@
 
 		/* Appearance */
 		background-color: var(--bg-muted);
-		border-radius: 100%;
+		border-radius: var(--radius-full);
 
 		/* Layout */
 		display: flex;
