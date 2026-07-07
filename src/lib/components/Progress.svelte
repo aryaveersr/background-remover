@@ -31,6 +31,6 @@
 		height: 100%;
 
 		/* Apperance */
-		background-color: var(--fg-subtle);
+		background-color: var(--primary-solid);
 	}
 </style>
