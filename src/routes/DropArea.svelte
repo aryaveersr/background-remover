@@ -11,11 +11,13 @@
 </script>
 
 <svelte:window
-	ondragenter={() => {
+	ondragenter={(ev) => {
+		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
 		counter++;
 		hovering = true;
 	}}
-	ondragleave={() => {
+	ondragleave={(ev) => {
+		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
 		counter--;
 		if (counter == 0) hovering = false;
 	}}
