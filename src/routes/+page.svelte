@@ -1,19 +1,31 @@
 <script lang="ts">
-	import { setEntries, Entries } from '$lib/entries.svelte';
+	import { setEntries, Entries, getEntries } from '$lib/entries.svelte';
+	import { createEntry } from '$lib/entry';
+	import { mimeTypes } from '$lib/utils/mime';
 	import AddImages from './AddImages.svelte';
-	import DropHandler from './DropHandler.svelte';
+	import DropArea from './DropArea.svelte';
 	import Header from './Header.svelte';
 	import ListImages from './ListImages.svelte';
-	import PasteHandler from './PasteHandler.svelte';
 
 	setEntries(new Entries());
+
+	let entries = getEntries();
 </script>
+
+<svelte:window
+	onpaste={(ev) => {
+		for (const item of ev.clipboardData!.items) {
+			if (item.kind != 'file') continue;
+			if (!mimeTypes.includes(item.type)) continue;
+
+			entries.add(createEntry(item.getAsFile()!));
+		}
+	}}
+/>
 
 <div>
 	<Header />
-
-	<DropHandler />
-	<PasteHandler />
+	<DropArea />
 
 	<section>
 		<AddImages />
