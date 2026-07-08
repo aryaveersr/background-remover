@@ -2,10 +2,10 @@
 	import { setEntries, Entries, getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';
-	import AddImages from './AddImages.svelte';
-	import DropArea from './DropArea.svelte';
-	import Header from './Header.svelte';
-	import ListImages from './ListImages.svelte';
+	import { Header } from '$lib/components/Header';
+	import { AddImage } from '$lib/components/AddImage/';
+	import { ImageList } from '$lib/components/ImageList';
+	import DropArea from '$lib/components/DropArea.svelte';
 
 	setEntries(new Entries());
 
@@ -26,13 +26,8 @@
 <div>
 	<Header />
 	<DropArea />
-
-	<section>
-		<AddImages />
-	</section>
-	<section>
-		<ListImages />
-	</section>
+	<AddImage />
+	<ImageList />
 </div>
 
 <style>

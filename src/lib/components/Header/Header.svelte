@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import ThemeToggle from './ThemeToggle.svelte';
 	import { Eraser } from '@lucide/svelte';
 </script>
 

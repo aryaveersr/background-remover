@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '$lib/components/Icon.svelte';
+	import Icon from '$lib/components/ui/Icon.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';

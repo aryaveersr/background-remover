@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import Progress from '$lib/components/Progress.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Icon from '$lib/components/ui/Icon.svelte';
+	import Progress from '$lib/components/ui/Progress.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { downloadEntry } from '$lib/entry';
 	import { ArrowDownToLine, Images, Trash2 } from '@lucide/svelte';

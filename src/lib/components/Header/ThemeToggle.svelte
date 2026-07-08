@@ -1,6 +1,6 @@
 <script>
 	import { Moon, Sun } from '@lucide/svelte';
-	import Button from './Button.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 	import { onMount } from 'svelte';
 
 	let theme = $state('dark');

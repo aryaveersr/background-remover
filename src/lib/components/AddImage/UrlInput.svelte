@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Input from '$lib/components/Input.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Input from '$lib/components/ui/Input.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
 	import { mimeTypes } from '$lib/utils/mime';

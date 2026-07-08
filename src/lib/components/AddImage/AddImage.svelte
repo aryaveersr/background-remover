@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import FileUpload from '$lib/components/FileUpload.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import FileUpload from '$lib/components/ui/FileUpload.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
 	import { extensions, mimeTypes } from '$lib/utils/mime';
