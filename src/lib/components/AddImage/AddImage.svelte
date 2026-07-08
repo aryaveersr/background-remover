@@ -9,7 +9,7 @@
 	let entries = getEntries();
 </script>
 
-<div class="container">
+<section>
 	<div class="top">
 		<h2>Upload images</h2>
 
@@ -36,10 +36,10 @@
 	>
 		Remove Background
 	</Button>
-</div>
+</section>
 
 <style>
-	.container {
+	section {
 		/* Appearance */
 		background-color: var(--bg-surface);
 		border-bottom: 1px solid var(--border-muted);
@@ -80,10 +80,7 @@
 	}
 
 	@media (min-width: 900px) {
-		.container {
-			/* Take all space*/
-			height: 100%;
-
+		section {
 			border-bottom: none;
 			border-right: 1px solid var(--border-muted);
 		}
