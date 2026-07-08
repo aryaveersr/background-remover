@@ -4,6 +4,7 @@
 	import { createEntry } from '$lib/entry';
 	import { getImages } from '$lib/utils/image';
 	import { Plus } from '@lucide/svelte';
+	import { fade } from 'svelte/transition';
 
 	let entries = getEntries();
 	let hovering = $state(false);
@@ -37,7 +38,7 @@
 />
 
 {#if hovering}
-	<section>
+	<section transition:fade={{ duration: 100 }}>
 		<div>
 			<Icon>
 				<Plus />
