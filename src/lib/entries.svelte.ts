@@ -6,7 +6,10 @@ export class Entries {
 
 	add = (entry: Entry) => this.all.push(entry);
 	isEmpty = () => this.all.length == 0;
-	downloadAll = () => this.all.filter((entry) => entry.kind == 'processed').forEach(downloadEntry);
+
+	downloadProcessed() {
+		this.all.filter((entry) => entry.kind == 'processed').forEach(downloadEntry);
+	}
 
 	uploadPending() {
 		this.all.filter((entry) => entry.kind == 'pending').forEach(uploadEntry);

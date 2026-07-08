@@ -66,7 +66,7 @@
 				<h3>Processed</h3>
 				<div>
 					<Button kind="ghost" onclick={() => entries.clearProcessed()}>Clear</Button>
-					<Button color="primary" onclick={() => entries.downloadAll()}>Download all</Button>
+					<Button color="primary" onclick={() => entries.downloadProcessed()}>Download all</Button>
 				</div>
 			</header>
 			<ul aria-label="Processed images">
