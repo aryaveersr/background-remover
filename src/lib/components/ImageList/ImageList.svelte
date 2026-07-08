@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/Button.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
 	import { getEntries } from '$lib/entries.svelte';
-	import { downloadEntry } from '$lib/entry';
-	import { ArrowDownToLine, Images, Trash2 } from '@lucide/svelte';
+	import { Images } from '@lucide/svelte';
+	import Card from './Card.svelte';
 
 	let entries = getEntries();
 	let unprocessed = $derived(entries.all.filter((entry) => entry.kind != 'processed'));
@@ -35,27 +34,7 @@
 			</header>
 			<ul aria-label="Unprocessed images">
 				{#each unprocessed as entry (entry.id)}
-					<li>
-						<figure>
-							<img src={entry.src} aria-labelledby="filename-{entry.id}" alt={entry.file.name} />
-							<figcaption>
-								<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
-								<Button
-									kind="ghost"
-									onclick={() => entries.remove(entry)}
-									aria-label="Remove"
-									title="Remove"
-								>
-									<Trash2 />
-								</Button>
-							</figcaption>
-						</figure>
-						<Progress
-							aria-label="Upload progress"
-							aria-hidden={entry.kind == 'pending'}
-							value={entry.kind == 'processing' ? entry.progress : 0}
-						/>
-					</li>
+					<Card {entry} />
 				{/each}
 			</ul>
 		</section>
@@ -71,23 +50,7 @@
 			</header>
 			<ul aria-label="Processed images">
 				{#each processed as entry (entry.id)}
-					<li>
-						<figure>
-							<img src={entry.out} aria-labelledby="filename-{entry.id}" alt={entry.file.name} />
-							<figcaption>
-								<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
-								<Button
-									kind="ghost"
-									onclick={() => downloadEntry(entry)}
-									aria-label="Download"
-									title="Download"
-								>
-									<ArrowDownToLine />
-								</Button>
-							</figcaption>
-						</figure>
-						<Progress aria-hidden="true" value={0} />
-					</li>
+					<Card {entry} />
 				{/each}
 			</ul>
 		</section>
@@ -193,38 +156,6 @@
 		/* Spacing */
 		gap: 2rem;
 		padding-block: 1rem;
-	}
-
-	li {
-		/* Appearance */
-		background-color: var(--bg-surface);
-		border: 1px solid var(--border-muted);
-	}
-
-	figcaption {
-		/* Spacing */
-		padding: 0.5rem 0.5rem 0.5rem 0.75rem;
-		gap: 1rem;
-
-		/* Layout */
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	figcaption p {
-		/* Wrap filename */
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-
-	img {
-		/* Fill space */
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		aspect-ratio: 1;
 	}
 
 	@media (min-width: 900px) {
