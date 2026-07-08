@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
-	import { mimeTypes } from '$lib/utils/mime';
+	import { getImages } from '$lib/utils/image';
 	import { Plus } from '@lucide/svelte';
 
 	let entries = getEntries();
@@ -12,17 +12,17 @@
 
 <svelte:window
 	ondragenter={(ev) => {
-		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
+		if (getImages(ev.dataTransfer!).length == 0) return;
 		counter++;
 		hovering = true;
 	}}
 	ondragleave={(ev) => {
-		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
+		if (getImages(ev.dataTransfer!).length == 0) return;
 		counter--;
 		if (counter == 0) hovering = false;
 	}}
 	ondragover={(ev) => {
-		if ([...ev.dataTransfer!.items].every((i) => i.kind !== 'file')) return;
+		if (getImages(ev.dataTransfer!).length == 0) return;
 		ev.preventDefault();
 	}}
 	ondrop={(ev) => {
@@ -30,11 +30,9 @@
 		hovering = false;
 		counter = 0;
 
-		const images = [...ev.dataTransfer!.items]
-			.filter((item) => item.kind === 'file')
-			.filter((item) => mimeTypes.includes(item.type));
-
-		images.forEach((item) => entries.add(createEntry(item.getAsFile()!)));
+		getImages(ev.dataTransfer!)
+			.map(createEntry)
+			.forEach((file) => entries.add(file));
 	}}
 />
 

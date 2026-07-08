@@ -3,7 +3,7 @@
 	import FileUpload from '$lib/components/ui/FileUpload.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
-	import { extensions, mimeTypes } from '$lib/utils/mime';
+	import { extensions, mimeTypes } from '$lib/utils/image';
 	import UrlInput from './UrlInput.svelte';
 
 	let entries = getEntries();

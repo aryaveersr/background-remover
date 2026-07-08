@@ -3,7 +3,7 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
-	import { mimeTypes } from '$lib/utils/mime';
+	import { mimeTypes } from '$lib/utils/image';
 	import { Plus } from '@lucide/svelte';
 
 	let entries = getEntries();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setEntries, Entries, getEntries } from '$lib/entries.svelte';
 	import { createEntry } from '$lib/entry';
-	import { mimeTypes } from '$lib/utils/mime';
+	import { getImages } from '$lib/utils/image';
 	import { Header } from '$lib/components/Header';
 	import { AddImage } from '$lib/components/AddImage/';
 	import { ImageList } from '$lib/components/ImageList';
@@ -14,12 +14,9 @@
 
 <svelte:window
 	onpaste={(ev) => {
-		for (const item of ev.clipboardData!.items) {
-			if (item.kind != 'file') continue;
-			if (!mimeTypes.includes(item.type)) continue;
-
-			entries.add(createEntry(item.getAsFile()!));
-		}
+		getImages(ev.clipboardData!)
+			.map(createEntry)
+			.forEach((file) => entries.add(file));
 	}}
 />
 
