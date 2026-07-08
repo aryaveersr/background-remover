@@ -13,50 +13,37 @@
 	let entries = getEntries();
 </script>
 
-<li>
-	<figure>
-		<img
-			src={entry.kind == 'processed' ? entry.out : entry.src}
-			aria-labelledby="filename-{entry.id}"
-			alt={entry.file.name}
-		/>
-		<figcaption>
-			<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
-			{#if entry.kind == 'pending'}
-				<Button
-					kind="ghost"
-					aria-label="Remove"
-					title="Remove"
-					onclick={() => entries.remove(entry)}
-				>
-					<Trash2 />
-				</Button>
-			{:else if entry.kind == 'processed'}
-				<Button
-					kind="ghost"
-					onclick={() => downloadEntry(entry)}
-					aria-label="Download"
-					title="Download"
-				>
-					<ArrowDownToLine />
-				</Button>
-			{/if}
-		</figcaption>
-	</figure>
-	<Progress
-		aria-label="Upload progress"
-		aria-hidden={entry.kind != 'processing'}
-		value={entry.kind == 'processing' ? entry.progress : 0}
+<figure>
+	<img
+		src={entry.kind == 'processed' ? entry.out : entry.src}
+		aria-labelledby="filename-{entry.id}"
+		alt={entry.file.name}
 	/>
-</li>
+	<figcaption>
+		<p id="filename-{entry.id}" title={entry.file.name}>{entry.file.name}</p>
+		{#if entry.kind == 'pending'}
+			<Button kind="ghost" aria-label="Remove" title="Remove" onclick={() => entries.remove(entry)}>
+				<Trash2 />
+			</Button>
+		{:else if entry.kind == 'processed'}
+			<Button
+				kind="ghost"
+				onclick={() => downloadEntry(entry)}
+				aria-label="Download"
+				title="Download"
+			>
+				<ArrowDownToLine />
+			</Button>
+		{/if}
+	</figcaption>
+</figure>
+<Progress
+	aria-label="Upload progress"
+	aria-hidden={entry.kind != 'processing'}
+	value={entry.kind == 'processing' ? entry.progress : 0}
+/>
 
 <style>
-	li {
-		/* Appearance */
-		background-color: var(--bg-surface);
-		border: 1px solid var(--border-muted);
-	}
-
 	figcaption {
 		/* Spacing */
 		padding: 0.5rem 0.5rem 0.5rem 0.75rem;

@@ -4,6 +4,8 @@
 	import { getEntries } from '$lib/entries.svelte';
 	import { Images } from '@lucide/svelte';
 	import Card from './Card.svelte';
+	import { fly } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
 
 	let entries = getEntries();
 	let unprocessed = $derived(entries.all.filter((entry) => entry.kind != 'processed'));
@@ -34,7 +36,9 @@
 			</header>
 			<ul aria-label="Unprocessed images">
 				{#each unprocessed as entry (entry.id)}
-					<Card {entry} />
+					<li in:fly|global={{ x: -50 }} animate:flip={{ duration: 500 }}>
+						<Card {entry} />
+					</li>
 				{/each}
 			</ul>
 		</section>
@@ -50,7 +54,9 @@
 			</header>
 			<ul aria-label="Processed images">
 				{#each processed as entry (entry.id)}
-					<Card {entry} />
+					<li in:fly|global={{ y: -50 }}>
+						<Card {entry} />
+					</li>
 				{/each}
 			</ul>
 		</section>
@@ -156,6 +162,12 @@
 		/* Spacing */
 		gap: 2rem;
 		padding-block: 1rem;
+	}
+
+	li {
+		/* Appearance */
+		background-color: var(--bg-surface);
+		border: 1px solid var(--border-muted);
 	}
 
 	@media (min-width: 900px) {
