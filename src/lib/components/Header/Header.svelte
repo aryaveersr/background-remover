@@ -48,9 +48,6 @@
 		/* Spacing */
 		padding: 0.5rem 0.75rem;
 
-		/* Interaction */
-		transition: background-color 0.2s ease-in-out;
-
 		&:hover {
 			background-color: var(--bg-subtle);
 		}

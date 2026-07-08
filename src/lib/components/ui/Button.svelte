@@ -97,7 +97,6 @@
 
 		/* Interactions */
 		cursor: pointer;
-		transition: background-color 0.2s ease-in-out;
 
 		&:hover,
 		&:focus {
