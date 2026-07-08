@@ -8,8 +8,8 @@ export class Entries {
 	isEmpty = () => this.all.length == 0;
 	downloadAll = () => this.all.filter((entry) => entry.kind == 'processed').forEach(downloadEntry);
 
-	upload() {
-		this.all.filter((entry) => entry.kind == 'base').forEach(uploadEntry);
+	uploadPending() {
+		this.all.filter((entry) => entry.kind == 'pending').forEach(uploadEntry);
 	}
 
 	clearAll() {
@@ -17,9 +17,9 @@ export class Entries {
 		this.all = [];
 	}
 
-	clearBase() {
-		this.all.filter((entry) => entry.kind == 'base').forEach(destroyEntry);
-		this.all = this.all.filter((entry) => entry.kind != 'base');
+	clearPending() {
+		this.all.filter((entry) => entry.kind == 'pending').forEach(destroyEntry);
+		this.all = this.all.filter((entry) => entry.kind != 'pending');
 	}
 
 	clearProcessed() {

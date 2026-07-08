@@ -31,8 +31,8 @@
 		size="md"
 		color="primary"
 		style="width: 100%"
-		disabled={entries.all.every((entry) => entry.kind != 'base')}
-		onclick={() => entries.upload()}
+		disabled={entries.all.every((entry) => entry.kind != 'pending')}
+		onclick={() => entries.uploadPending()}
 	>
 		Remove Background
 	</Button>

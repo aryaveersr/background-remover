@@ -1,30 +1,33 @@
 export interface BaseEntry {
 	id: number;
-	kind: 'base';
 	file: File;
 	src: string;
 }
 
-export type ProcessingEntry = {
+export interface PendingEntry extends BaseEntry {
+	kind: 'pending';
+}
+
+export interface ProcessingEntry extends BaseEntry {
 	kind: 'processing';
 	progress: number;
-} & Omit<BaseEntry, 'kind'>;
+}
 
-export type ProcessedEntry = {
+export interface ProcessedEntry extends BaseEntry {
 	kind: 'processed';
 	out: string;
-} & Omit<BaseEntry, 'kind'>;
+}
 
-export type Entry = BaseEntry | ProcessingEntry | ProcessedEntry;
+export type Entry = PendingEntry | ProcessingEntry | ProcessedEntry;
 
 let idCounter = 0;
 
-export function createEntry(file: File): BaseEntry {
+export function createEntry(file: File): PendingEntry {
 	return {
 		id: idCounter++,
 		file: file,
 		src: URL.createObjectURL(file),
-		kind: 'base'
+		kind: 'pending'
 	};
 }
 
@@ -35,8 +38,8 @@ export function destroyEntry(entry: Entry) {
 	}
 }
 
-export function uploadEntry(baseEntry: BaseEntry) {
-	const entry = baseEntry as Entry;
+export function uploadEntry(pendingEntry: PendingEntry) {
+	const entry = pendingEntry as Entry;
 	const xhr = new XMLHttpRequest();
 	const form = new FormData();
 

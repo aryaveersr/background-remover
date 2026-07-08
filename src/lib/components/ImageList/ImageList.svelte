@@ -31,7 +31,7 @@
 		<section>
 			<header>
 				<h3>Unprocessed</h3>
-				<Button kind="ghost" onclick={() => entries.clearBase()}>Clear</Button>
+				<Button kind="ghost" onclick={() => entries.clearPending()}>Clear</Button>
 			</header>
 			<ul aria-label="Unprocessed images">
 				{#each unprocessed as entry (entry.id)}
@@ -52,7 +52,7 @@
 						</figure>
 						<Progress
 							aria-label="Upload progress"
-							aria-hidden={entry.kind == 'base'}
+							aria-hidden={entry.kind == 'pending'}
 							value={entry.kind == 'processing' ? entry.progress : 0}
 						/>
 					</li>
