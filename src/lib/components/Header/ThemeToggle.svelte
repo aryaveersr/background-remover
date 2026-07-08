@@ -1,16 +1,9 @@
 <script>
 	import { Moon, Sun } from '@lucide/svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { onMount } from 'svelte';
-
-	let theme = $state('dark');
-
-	onMount(() => {
-		theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-	});
 
 	function toggleTheme() {
-		theme = theme == 'light' ? 'dark' : 'light';
+		const theme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
 		localStorage.setItem('theme', theme);
 
 		if (theme == 'dark') document.documentElement.classList.add('dark');
@@ -38,9 +31,30 @@
 	onclick={toggleTheme}
 	style="border-radius: var(--radius-full); aspect-ratio: 1 / 1;"
 >
-	{#if theme == 'light'}
+	<span class="light">
 		<Sun />
-	{:else}
+	</span>
+	<span class="dark">
 		<Moon />
-	{/if}
+	</span>
 </Button>
+
+<style>
+	span.light {
+		display: contents;
+	}
+
+	span.dark {
+		display: none;
+	}
+
+	:global(html.dark) {
+		span.light {
+			display: none;
+		}
+
+		span.dark {
+			display: contents;
+		}
+	}
+</style>
