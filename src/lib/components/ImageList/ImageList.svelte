@@ -2,7 +2,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import { getEntries } from '$lib/entries.svelte';
 	import Card from './Card.svelte';
-	import { crossfade, fly } from 'svelte/transition';
+	import { crossfade, fly, slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 
 	let entries = getEntries();
@@ -17,39 +17,43 @@
 		<h2>Images</h2>
 		<Button kind="subtle" onclick={() => entries.clearAll()}>Clear all</Button>
 	</header>
-	<section class:hidden={unprocessed.length == 0}>
-		<header>
-			<h3>Unprocessed</h3>
-			<Button kind="subtle" onclick={() => entries.clearPending()}>Clear</Button>
-		</header>
-		<ul aria-label="Unprocessed images">
-			{#each unprocessed as entry (entry.id)}
-				<li
-					in:fly|global={{ x: -50 }}
-					out:send={{ key: entry.id }}
-					animate:flip={{ duration: 500 }}
-				>
-					<Card {entry} />
-				</li>
-			{/each}
-		</ul>
-	</section>
-	<section class:hidden={processed.length == 0}>
-		<header>
-			<h3>Processed</h3>
-			<div>
-				<Button kind="subtle" onclick={() => entries.clearProcessed()}>Clear</Button>
-				<Button color="primary" onclick={() => entries.downloadProcessed()}>Download all</Button>
-			</div>
-		</header>
-		<ul aria-label="Processed images">
-			{#each processed as entry (entry.id)}
-				<li in:receive={{ key: entry.id }}>
-					<Card {entry} />
-				</li>
-			{/each}
-		</ul>
-	</section>
+	{#if unprocessed.length > 0}
+		<section transition:slide>
+			<header>
+				<h3>Unprocessed</h3>
+				<Button kind="subtle" onclick={() => entries.clearPending()}>Clear</Button>
+			</header>
+			<ul aria-label="Unprocessed images">
+				{#each unprocessed as entry (entry.id)}
+					<li
+						in:fly|global={{ x: -50 }}
+						out:send={{ key: entry.id }}
+						animate:flip={{ duration: 500 }}
+					>
+						<Card {entry} />
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+	{#if processed.length > 0}
+		<section transition:slide>
+			<header>
+				<h3>Processed</h3>
+				<div>
+					<Button kind="subtle" onclick={() => entries.clearProcessed()}>Clear</Button>
+					<Button color="primary" onclick={() => entries.downloadProcessed()}>Download all</Button>
+				</div>
+			</header>
+			<ul aria-label="Processed images">
+				{#each processed as entry (entry.id)}
+					<li in:receive={{ key: entry.id }}>
+						<Card {entry} />
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
 </div>
 
 <style>
@@ -73,10 +77,6 @@
 
 		/* Appearance */
 		background-color: transparent;
-	}
-
-	.hidden {
-		display: none;
 	}
 
 	header {
