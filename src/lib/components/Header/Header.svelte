@@ -44,6 +44,7 @@
 		/* Appearance */
 		color: var(--fg-muted);
 		text-decoration: none;
+		border-radius: var(--radius-md);
 
 		/* Spacing */
 		padding: 0.5rem 0.75rem;
