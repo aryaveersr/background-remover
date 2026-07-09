@@ -5,6 +5,7 @@
 	import { Header } from '$lib/components/Header';
 	import { AddImage } from '$lib/components/AddImage/';
 	import { ImageList } from '$lib/components/ImageList';
+	import { Settings } from '$lib/components/Settings';
 	import DropArea from '$lib/components/DropArea.svelte';
 
 	setEntries(new Entries());
@@ -25,6 +26,7 @@
 	<DropArea />
 	<AddImage />
 	<ImageList />
+	<Settings />
 </div>
 
 <style>
