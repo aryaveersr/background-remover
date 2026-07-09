@@ -1,8 +1,14 @@
 import { createContext } from 'svelte';
 import { destroyEntry, downloadEntry, uploadEntry, type Entry } from './entry';
+import type { Settings } from './settings';
 
 export class Entries {
 	public all = $state<Entry[]>([]);
+	private settings: Settings;
+
+	constructor(settings: Settings) {
+		this.settings = settings;
+	}
 
 	add = (entry: Entry) => this.all.push(entry);
 	isEmpty = () => this.all.length == 0;
@@ -12,7 +18,9 @@ export class Entries {
 	}
 
 	uploadPending() {
-		this.all.filter((entry) => entry.kind == 'pending').forEach(uploadEntry);
+		this.all
+			.filter((entry) => entry.kind == 'pending')
+			.forEach((entry) => uploadEntry(entry, this.settings));
 	}
 
 	clearAll() {

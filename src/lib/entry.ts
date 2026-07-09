@@ -1,3 +1,5 @@
+import { Settings } from './settings';
+
 export interface BaseEntry {
 	id: number;
 	file: File;
@@ -38,7 +40,7 @@ export function destroyEntry(entry: Entry) {
 	}
 }
 
-export function uploadEntry(pendingEntry: PendingEntry) {
+export function uploadEntry(pendingEntry: PendingEntry, settings: Settings) {
 	const entry = pendingEntry as Entry;
 	const xhr = new XMLHttpRequest();
 	const form = new FormData();
@@ -57,6 +59,8 @@ export function uploadEntry(pendingEntry: PendingEntry) {
 	xhr.addEventListener('load', () => {
 		(entry as ProcessedEntry).kind = 'processed';
 		(entry as ProcessedEntry).out = URL.createObjectURL(xhr.response);
+
+		if (settings.autoDownload) downloadEntry(entry as ProcessedEntry);
 	});
 
 	xhr.responseType = 'blob';

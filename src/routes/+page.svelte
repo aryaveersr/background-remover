@@ -7,8 +7,12 @@
 	import { ImageList } from '$lib/components/ImageList';
 	import { Settings } from '$lib/components/Settings';
 	import DropArea from '$lib/components/DropArea.svelte';
+	import { setSettings, Settings as SettingsClass } from '$lib/settings';
 
-	setEntries(new Entries());
+	let settings = new SettingsClass();
+
+	setSettings(settings);
+	setEntries(new Entries(settings));
 
 	let entries = getEntries();
 </script>

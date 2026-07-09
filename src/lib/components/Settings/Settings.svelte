@@ -4,9 +4,10 @@
 	import Button from '../ui/Button.svelte';
 	import { X } from '@lucide/svelte';
 	import Toggle from '../ui/Toggle.svelte';
-	let isOpen = $derived(page.url.searchParams.has('settings'));
+	import { getSettings } from '$lib/settings';
 
-	$effect(() => console.log(isOpen));
+	let isOpen = $derived(page.url.searchParams.has('settings'));
+	let settings = getSettings();
 </script>
 
 {#if isOpen}
@@ -19,15 +20,11 @@
 				</Button>
 			</header>
 			<div class="section">
-				<h4>User Interface</h4>
+				<h4>Behavior</h4>
 				<ul>
 					<li>
-						<span>Color scheme</span>
-						<Button kind="subtle">tEst</Button>
-					</li>
-					<li>
 						<span>Auto download when done</span>
-						<Toggle initial={false} onchange={(v) => console.log(v)} />
+						<Toggle initial={settings.autoDownload} onchange={(v) => (settings.autoDownload = v)} />
 					</li>
 				</ul>
 			</div>
