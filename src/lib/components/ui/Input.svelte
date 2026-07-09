@@ -25,11 +25,11 @@
 		border-radius: var(--radius-md);
 
 		/* Font */
-		font-size: var(--text-md);
+		font-size: var(--text-default);
 
 		/* Spacing */
 		padding: 0.75rem 0.875rem;
-		gap: var(--text-md);
+		gap: var(--text-default);
 
 		/* Layout */
 		display: inline-flex;

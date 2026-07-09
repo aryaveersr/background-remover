@@ -70,7 +70,7 @@
 	}
 
 	[data-size='md'] {
-		--btn-font-size: var(--text-md);
+		--btn-font-size: var(--text-default);
 		--btn-padding: 0.75rem 0.875rem;
 	}
 
